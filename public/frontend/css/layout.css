@@ -1,0 +1,153 @@
+*{
+    margin: 0 ;
+    padding: 0;
+    outline: none;
+    font-family: "Nunito-Regular";
+}
+button:focus{
+    outline: none; 
+}
+ul{
+    list-style: none;
+    
+}
+.seemore{
+    display: inline-block;
+    padding: .5em 2em;
+    color: #3e4c66;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 1.5em;
+
+}
+.seemore:hover{
+    text-decoration: none;
+}
+.select2{
+    width: 100%; 
+    
+}
+.select2-container .select2-selection--single{
+    height: auto ;
+    padding: .5em  ;
+}
+.select2-container--default .select2-selection--single{
+    border: 1px solid #e0e0e0;  
+    border-radius: .5em;   
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow{
+    top: 8px;  
+    right: 8px;
+}
+header{
+    padding: 2em;  
+}
+header.fixed{
+    position: fixed;
+    top: 0;  
+    left: 0 ;
+    width: 100% ;
+    background: #fff;
+    z-index: 99;  
+}
+header .menu li{
+    padding: .5em 1.5em;  
+
+}
+header .menu li a{
+    color: #000; 
+}
+header .logo span{
+    font-size: 2em; 
+    font-family: "Nunito-Bold";
+}
+
+.box-search{
+    position: relative;  
+}
+.box-search button{
+    position: absolute;  
+    border: none;  
+    background: transparent;  
+    top: 50%;  
+    right: 1em;
+    font-size: 1.2em;  
+    color: #cccccc;   
+    transform: translateY(-50%); 
+    cursor: pointer;  
+}
+.box-search input{
+    padding: .4em 1.5em ; 
+    width: 22em;
+    border-radius: 3em;  
+    border: none;  
+    background: #f7f7f7;  
+}
+.box-search input::placeholder{
+    color: #636363;  
+    font-size: .9em;  
+}
+.footer{
+    padding :5em 0 2em 0;  
+    background: #24324a; 
+}
+footer h5{
+   font-family: "Nunito-SemiBold";
+   margin-bottom: 1em; 
+   font-size: 1.4em;  
+   color: #fff; 
+}
+footer ul li a , footer .desc{
+    color: #d4d4d4; 
+}
+footer ul li a:hover{
+    text-decoration: none; 
+    color: #ffffff;  
+}
+footer .contact li{
+    display: flex; 
+    justify-content: center;  
+    align-items:center;  
+    margin-right: 1em;  
+    width: 2.5em; 
+    height: 2.5em;  
+    background: #fff;  
+    border-radius: 50%;   
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+}
+footer .contact li:hover a {
+    color: #24324a;
+}
+footer .coppy-right{
+    padding: .4em;  
+    font-size: .9em;  
+    color: #fff; 
+    background: #1d273a; 
+}
+@media only screen and (min-width: 1200px) {
+    html{
+        font-size: 14px ;
+    }
+    
+}
+@media only screen and (min-width: 1200px) {
+    html{
+        font-size: 16px ;
+    }
+    
+}
+@media only screen and (min-width: 1450px) {
+/*     html{
+        font-size: 16px ;
+    }
+    .container{
+        max-width: 1320px;  
+    } */
+}
+@media only screen and (min-width: 1600px) {
+/*     html{
+        font-size: 20px ;
+    }
+    .container{
+        max-width: 1440px;  
+    } */
+  }

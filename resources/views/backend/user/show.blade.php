@@ -61,7 +61,7 @@
                             </tr>
                             <tr>
                                 <td><b>Chức vụ</b></td>
-                                <td>{{ ($user->role_id == 1) ? 'Administrator' : 'Customer' }}</td>
+                                <td><?php if($user->role_id == 1) {echo "Admin";} else if ($user->role_id == 2) {echo "Owner";} else {echo "Customer";} ?></td>
                             </tr>
                             <tr>
                                 <td><b>Trạng thái</b></td>
@@ -69,9 +69,11 @@
                             </tr>
 
                             </tbody></table>
-                        <div class="box-footer">
-                            <button type="" class="btn btn-primary">Duyệt</button>
-                        </div>
+                        @if($user->role_id == 2)
+                            <div class="box-footer">
+                                <button type="" class="btn btn-primary">Duyệt</button>
+                            </div>
+                        @endif
                     </div>
                 </div>
 

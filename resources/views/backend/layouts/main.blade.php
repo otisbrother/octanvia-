@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminBookingRoom</title>
+    <title>Rent House | Admin</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <base href="{{ asset('') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">

@@ -58,7 +58,7 @@
             </li>
             <li class="treeview">
                 <a href="javascript:void(0)">
-                    <i class="fa fa-dashboard"></i> <span>QL bình luận</span>
+                    <i class="fa fa-dashboard"></i> <span>QL Bình luận</span>
                     <span class="pull-right-container">
                          <i class="fa fa-angle-left pull-right"></i>
                     </span>
@@ -70,7 +70,7 @@
             </li>
             <li class="treeview">
                 <a href="javascript:void(0)">
-                    <i class="fa fa-dashboard"></i> <span>QL báo cáo</span>
+                    <i class="fa fa-dashboard"></i> <span>QL Báo cáo</span>
                     <span class="pull-right-container">
                          <i class="fa fa-angle-left pull-right"></i>
                     </span>
@@ -82,7 +82,7 @@
             </li>
             <li class="treeview">
                 <a href="javascript:void(0)">
-                    <i class="fa fa-dashboard"></i> <span>Quản lý user</span>
+                    <i class="fa fa-dashboard"></i> <span>QL User</span>
                     <span class="pull-right-container">
                          <i class="fa fa-angle-left pull-right"></i>
                     </span>
@@ -94,31 +94,20 @@
             </li>
             <li class="#">
                 <a href="{{route('admin.city.index')}}">
-                    <i class="fa fa-dashboard"></i> <span>QL DB Tỉnh/Thành Phố</span>
+                    <i class="fa fa-dashboard"></i> <span>QL Tỉnh/Thành Phố</span>
                 </a>
             </li>
             <li class="#">
                 <a href="{{route('admin.district.index')}}">
-                    <i class="fa fa-dashboard"></i> <span>QL DB Quận/Huyện</span>
+                    <i class="fa fa-dashboard"></i> <span>QL Quận/Huyện</span>
                 </a>
             </li>
             <li class="#">
                 <a href="{{ route('admin.showAllExtendRoomRequest') }}">
-                    <i class="fa fa-dashboard"></i><span>QL yêu cầu gia hạn</span>
+                    <i class="fa fa-dashboard"></i><span>QL Yêu cầu gia hạn</span>
                 </a>
             </li>
-{{--            <li class="treeview">--}}
-{{--                <a href="#">--}}
-{{--                    <i class="fa fa-dashboard"></i> <span>Dashboard</span>--}}
-{{--                    <span class="pull-right-container">--}}
-{{--              <i class="fa fa-angle-left pull-right"></i>--}}
-{{--            </span>--}}
-{{--                </a>--}}
-{{--                <ul class="treeview-menu">--}}
-{{--                    <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>--}}
-{{--                    <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>--}}
-{{--                </ul>--}}
-{{--            </li>--}}
+
         </ul>
     </section>
     <!-- /.sidebar -->

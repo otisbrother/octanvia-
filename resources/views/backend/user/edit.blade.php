@@ -27,7 +27,7 @@
                                 <select class="form-control" name="role_id">
                                     <option value="1" {{ ($user->role_id == 1) ? 'selected' : '' }}>Admin</option>
                                     <option value="2" {{ ($user->role_id == 2) ? 'selected' : '' }}>Owner</option>
-                                    <option value="2" {{ ($user->role_id == 3) ? 'selected' : '' }}>Customer</option>
+                                    <option value="3" {{ ($user->role_id == 3) ? 'selected' : '' }}>Customer</option>
                                 </select>
                             </div>
                             <div class="form-group">

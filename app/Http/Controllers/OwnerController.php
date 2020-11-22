@@ -91,6 +91,7 @@ class OwnerController extends Controller
         $r->user_id = $user->id;
         $r->quantity = $request->input('quantity');
         $r->unit_date = $unit_date;
+        $r->phone = $user->phone;
         if($unit_date == 1) { // tuan
             $total_price = $p*$q;
         } else if ($unit_date == 2 ) { // thang
@@ -100,6 +101,7 @@ class OwnerController extends Controller
         }
         $r->total_price = $total_price;
         $r->save();
+        return redirect()->route('owner.room.index')->with('msg', 'Gửi yêu cầu gia hạn bài viết thành công. Vui lòng đợi Admin phê duyệt');
     }
 
     public function login()
@@ -199,17 +201,15 @@ class OwnerController extends Controller
     public function viewCreateRoom() {
         $typeRoom = Room_type::all();
         $city = City::all();
-        $district = District::all();
         $facility = Facilities::all();
         return view('owner.room.create', [
             'typeRoom' => $typeRoom,
             'city' => $city,
-            'district' => $district,
             'facility' => $facility
         ]);
     }
 
-    public function store(Request $request)
+    public function storeRoom(Request $request)
     {
         $validatedData = $request->validate([
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:10000'
@@ -304,9 +304,9 @@ class OwnerController extends Controller
         ]);
     }
 
-    public function viewExtend($roomId)
+    public function extendDate($roomId)
     {
-        $data = $roomId;
+        $data = Room::findOrFail($roomId);
         return view('owner.room.extend', [
             'data' => $data,
         ]);

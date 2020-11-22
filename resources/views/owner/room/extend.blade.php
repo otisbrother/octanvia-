@@ -8,7 +8,7 @@
     </style>
     <section class="content-header" style="text-align: center;width: 100%;">
         <h1>
-            Chỉnh sửa Thông Tin Nhà Trọ <a href="{{route('owner.room.index')}}" class="btn btn-success pull-right"><i class="fa fa-list"></i> Danh Sách</a>
+            Gia hạn thời gian hiển thị bài đăng <a href="{{route('owner.room.postextendDate', ['roomId' => $data->id])}}" class="btn btn-success pull-right"><i class="fa fa-list"></i> Danh Sách</a>
         </h1>
     </section>
     <section class="content">
@@ -20,23 +20,27 @@
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Id phòng</label>
-                                <input value="{{$data}}" type="text" class="form-control" id="room_id" name="room_id" readonly>
+                                <input value="{{ $data->id }}" type="text" class="form-control" id="room_id" name="room_id" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Loại Hình Gia Hạn Vd:Tháng,Năm,Ngày</label>
+                                <label for="exampleInputEmail1">Tên phòng</label>
+                                <input value="{{ $data->title }}" type="text" class="form-control" id="room_title" name="room_title" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Loại thời gian gia hạn ( ví dụ: tuần, tháng, năm )</label>
                                 <select id="unit_date" class="form-control w-50" name="unit_date" required onchange="totalMoney()">
-                                    <option value="">-- Chọn Loại HÌnh Gia Hạn</option>
+                                    <option value="">-- Chọn Loại Hình Gia Hạn</option>
                                     <option value="1">Tuần</option>
                                     <option value="2">Tháng</option>
                                     <option value="3">Năm</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Số Lượng Gia Hạn</label>
+                                <label for="exampleInputEmail1">Số lượng</label>
                                 <input value="" onchange="totalMoney()"  type="text" class="form-control" id="quantity" name="quantity" placeholder="Nhập số lượng vui lòng nhập số nguyên" required>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Tổng Tiền (VNĐ)</label>
+                                <label for="exampleInputEmail1">Tổng Tiền (VNĐ). Sẽ thanh toán offline với công ty.</label>
                                 <input value=""  type="text" class="form-control" id="total_price" name="total_price" placeholder="Tổng tiền" readonly>
                             </div>
                         </div>

@@ -74,10 +74,11 @@ Route::group(['prefix' => 'owner','as' => 'owner.', 'middleware' => ['checkLogin
     Route::get('/','OwnerController@getAllRoom')->name('room.index');
     Route::get('/show/{id}', 'OwnerController@showRoomDetail')->name('room.show');
     Route::get('/create', 'OwnerController@viewCreateRoom')->name('room.create');
-    Route::post('/postCreate', 'OwnerController@store')->name('room.store');
+    Route::post('/postCreateRoom', 'OwnerController@storeRoom')->name('room.storeRoom');
     Route::get('/edit/{id}', 'OwnerController@viewEditRoom')->name('room.edit');
     Route::post('/postEdit', 'OwnerController@update')->name('room.update');
-    Route::post('/extend/{roomId}', 'OwnerController@viewExtend')->name('room.extend');
+    Route::get('/room/extendDate/{roomId}', 'OwnerController@extendDate')->name('room.extendDate');
+    Route::post('/room/extendDate/{roomId}', 'OwnerController@require_extendDate')->name('room.postextendDate');
 //    Route::post('/extend/{roomId}', 'OwnerController@viewExtend')->name('room.extend');
     Route::get('/requestEditRoom/{roomId}', 'OwnerController@requestEditRoom')->name('room.requestEdit');
     Route::post('/sendRequestEditRoom', 'OwnerController@sendRequestEditRoom')->name('room.sendRequestEditRoom');

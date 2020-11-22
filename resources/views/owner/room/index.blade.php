@@ -1,5 +1,11 @@
 @extends('owner.layouts.main')
 @section('content')
+
+    <section class="content-header">
+        <h1>
+            Danh Sách Phòng Trọ <a href="{{route('owner.room.create')}}" class="btn btn-info pull-right"><i class="fa fa-plus"></i> Thêm Phòng Trọ</a>
+        </h1>
+    </section>
     @if (session('msg'))
         <div class="pad margin no-print">
             <div class="alert alert-success alert-dismissible" style="" id="thongbao">
@@ -9,11 +15,6 @@
             </div>
         </div>
     @endif
-    <section class="content-header">
-        <h1>
-            Danh Sách Phòng Trọ <a href="{{route('owner.room.create')}}" class="btn btn-info pull-right"><i class="fa fa-plus"></i> Thêm Phòng Trọ</a>
-        </h1>
-    </section>
     <section class="content">
         <div class="row">
             <div class="col-xs-12">

@@ -7,7 +7,7 @@
     </section>
     <section class="content">
         <div class="row">
-            <form  id="form_create_room" role="form" action="{{route('owner.room.store')}}" method="post" enctype="multipart/form-data">
+            <form  id="form_create_room" role="form" action="{{route('owner.room.storeRoom')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="col-md-6">
                     <div class="box box-primary">
@@ -45,9 +45,7 @@
                                 <label for="exampleInputEmail1">Quận/Huyện</label>
                                 <select class="form-control w-50" name="district" id="district" required>
                                     <option value="">-- Chọn Quận Huyện  --</option>
-                                    @foreach($district as $t_district)
-                                        <option value="{{$t_district->id}}">{{$t_district->name}}</option>
-                                    @endforeach
+
                                 </select>
                                 <span class="form-message" style="color: red"></span>
                             </div>
@@ -115,6 +113,17 @@
                                 <input type="text" class="form-control" id="waterPrice" name="waterPrice" placeholder="Giá nước / m3" required>
                                 <span class="form-message" style="color: red"></span>
                             </div>
+                            <div class="form-group">
+                                <label for="exampleInputFile">Chọn thời gian muốn hiển thị bài đăng</label>
+                                <div class="expired_date" style="display: flex;">
+                                    <input type="text" class="form-control" id="waterPrice" name="date_quantity" placeholder="Số tuần/tháng/năm (ít nhất 1 tuần)">
+                                    <select class="form-control w-50" name="unit_date">
+                                        <option value="1"> tuần </option>
+                                        <option value="2"> tháng</option>
+                                        <option value="3"> năm</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary" >Tạo</button>
@@ -180,5 +189,14 @@
                 validatorSelect.requiredDistrict('#district'),
             ]
         });
+    </script>
+@endsection
+@section('my_javascript')
+    <script>
+        $('#city').change(function () {
+            id = $(this).val();
+            $('#district').html('');
+            getAllDistrict(id);
+        })
     </script>
 @endsection

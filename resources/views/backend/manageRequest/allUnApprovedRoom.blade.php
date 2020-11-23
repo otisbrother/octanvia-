@@ -1,9 +1,9 @@
-@extends('owner.layouts.main')
+@extends('backend.layouts.main')
 @section('content')
 
     <section class="content-header">
         <h1>
-            Danh Sách Phòng Trọ <a href="{{route('owner.room.create')}}" class="btn btn-info pull-right"><i class="fa fa-plus"></i> Thêm Phòng Trọ</a>
+            Danh Sách Phòng Trọ Chưa Được Duyệt
         </h1>
     </section>
     @if (session('msg'))
@@ -39,27 +39,25 @@
                                 <th>Tên Tiêu Đề</th>
                                 <th>Loại Phòng</th>
                                 <th>Địa Chỉ</th>
-                                <th>Giá Phòng</th>
+                                <th>Giá Phòng (VNĐ)</th>
                                 <th>Hình ảnh</th>
-                                <th>Hiển thị</th>
-                                <th>Trạng thái</th>
+                                <th>Ngày Đăng Bài</th>
                                 <th class="text-center">Hành động</th>
                             </tr>
                             </tbody>
-                            @foreach($list as $key => $item)
+                            @foreach($data as $key => $item)
                                 <tr class="item-{{ $item->id }}"> <!-- Thêm Class Cho Dòng -->
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->title }}</td>
-                                    <td>{{ $item->roomType_id  }}</td>
+                                    <td>{{ \App\Room_type::findOrFail($item->roomType_id)->name }}</td>
                                     <td>{{ $item->address }}</td>
-                                    <td>{{ $item->price }}</td>
+                                    <td>{{  number_format($item->price,0,",",".") }}</td>
                                     <td>
                                         <img src="{{ $item->image }}" width="50" height="50">
                                     </td>
-                                    <td>{{ ($item->is_active==1) ? 'Có' : 'Không' }}</td>
-                                    <td><?php if($item->approval_id == null) { echo "Chưa được duyệt"; } else { echo "Đã được duyệt"; } ?></td>
+                                    <td>{{ $item->created_at }}</td>
                                     <td class="text-center">
-                                        <a href="{{route('owner.room.show', ['id'=> $item->id ])}}" class="btn btn-default">Xem</a>
+                                        <a href="{{route('admin.room.show', ['id'=> $item->id ])}}" class="btn btn-default">Xem</a>
                                         <!-- Thêm sự kiện onlick cho nút xóa -->
                                         <a href="javascript:void(0)" class="btn btn-danger" onclick="destroyRoom({{ $item->id }})" >Xóa</a>
                                     </td>

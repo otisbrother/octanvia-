@@ -62,6 +62,8 @@ Route::group(['prefix' => 'admin','as' => 'admin.', 'middleware' => ['checkLogin
     Route::get('/deleteRequest/writeReason/{request_id}', 'AdminController@writeReason')->name('deleteRequest.writeReason');
     Route::post('/deleteRequest/refuseRequest/{request_id}', 'AdminController@refuseExtendDate')->name('deleteRequest.refuseExtendDate');
     Route::get('/approveOwnerAccount/{owner_id}', 'AdminController@approveOwnerAccount');
+    Route::get('/getAllUnApprovedRoom/', 'AdminController@getAllUnApprovedRoom')->name('getAllUnApprovedRoom');
+    Route::get('/approveRoom/{id}', 'AdminController@approveRoom')->name('approveRoom');
 });
 
 Route::get('/owner/login', 'OwnerController@login')->name('owner.login');
@@ -83,4 +85,5 @@ Route::group(['prefix' => 'owner','as' => 'owner.', 'middleware' => ['checkLogin
     Route::get('/requestEditRoom/{roomId}', 'OwnerController@requestEditRoom')->name('room.requestEdit');
     Route::post('/sendRequestEditRoom', 'OwnerController@sendRequestEditRoom')->name('room.sendRequestEditRoom');
     Route::get('/showProfile', 'OwnerController@showProfile')->name('showProfile');
+    Route::get('/showNoti/{id}', 'OwnerController@showDetailNoti')->name('showNoti');
 });

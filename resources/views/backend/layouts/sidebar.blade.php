@@ -41,7 +41,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li class="active"><a href="{{route('admin.room.index')}}"><i class="fa fa-circle-o"></i>Tất cả phòng trọ</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>Danh sách phòng trọ chờ duyệt</a></li>
+                    <li><a href="{{ route('admin.getAllUnApprovedRoom') }}"><i class="fa fa-circle-o"></i>Danh sách phòng trọ chờ duyệt</a></li>
                 </ul>
 
             </li>

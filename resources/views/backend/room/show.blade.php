@@ -75,11 +75,15 @@
 
                             <tr>
                                 <td><b> Giá Điện / kWh </b></td>
-                                <td>{{ $data->electric_price}}</td>
+                                <td>{{ $data->electric_price}} VNĐ</td>
                             </tr>
                             <tr>
                                 <td><b> Giá Nước / m3 </b></td>
-                                <td>{{ $data->water_price}}</td>
+                                <td>{{ $data->water_price}} VNĐ</td>
+                            </tr>
+                            <tr>
+                                <td><b> Người đăng </b></td>
+                                <td>{{ \App\User::findOrFail($data->user_id)->name  }} </td>
                             </tr>
                             <tr>
                                 <td><b> Ngày Phê Duyệt </b></td>
@@ -115,6 +119,11 @@
                             </tr>
                         </tbody>
                     </table>
+                    @if($data->approval_id == null || $data->approval_date == null)
+                        <div class="box-footer">
+                            <a href="{{ route('admin.approveRoom', ['id' => $data->id]) }}" class="btn btn-primary">Duyệt bài đăng</a>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

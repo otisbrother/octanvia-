@@ -35,7 +35,7 @@ $all_noti = \App\Notify::where(['receive_id' => $user->id])->get();
                             <ul class="menu">
                                 @foreach($all_noti as $item)
                                     <li>
-                                        <a href="#">
+                                        <a href="{{ route('owner.showNoti', ['id' => $item->id]) }}">
                                             <i class="fa fa-users text-aqua"></i> {{ $item->content }}
                                         </a>
                                     </li>

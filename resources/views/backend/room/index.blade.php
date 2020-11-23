@@ -39,8 +39,8 @@
                             <th>Tên Tiêu Đề</th>
                             <th>Loại Phòng</th>
                             <th>Địa Chỉ</th>
-                            <th>Giá Phòng</th>
-                            <th>Hình ảnh</th>
+                            <th>Giá Phòng (VNĐ)</th>
+                            <th>Ảnh tiêu đề</th>
                             <th>Ngày Đăng Bài</th>
                             <th>Trạng thái</th>
                             <th class="text-center">Hành động</th>
@@ -50,9 +50,9 @@
                             <tr class="item-{{ $item->id }}"> <!-- Thêm Class Cho Dòng -->
                                 <td>{{ $item->id }}</td>
                                 <td>{{ $item->title }}</td>
-                                <td>{{ $item->roomType_id}}</td>
+                                <td>{{ \App\Room_type::findOrFail($item->roomType_id)->name }}</td>
                                 <td>{{ $item->address }}</td>
-                                <td>{{ $item->price }}</td>
+                                <td>{{  number_format($item->price,0,",",".") }}</td>
                                 <td>
                                     <img src="{{ $item->image }}" width="50" height="50">
                                 </td>

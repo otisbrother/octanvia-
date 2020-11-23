@@ -66,7 +66,7 @@ class OwnerController extends Controller
             $show_Request = 1;
         }
 
-        $canEdit = $data->canbe_edit;
+        $canEdit = $data->canbe_edit; // ??
         return view('owner.room.show', [
             'data' => $data,
             'roomTypeName' => $roomTypeName->name,
@@ -245,8 +245,36 @@ class OwnerController extends Controller
         $room->user_id = $user->id;
         $is_active = 0;
         $room->is_active = $is_active;
+
+
+
         $facilities = $request->input('facilities');
         $room->save();
+
+        // luu thoi gian muon hien thi
+        $p = 50000;
+        $total_price = 0;
+        $unit_date = $request->input('unit_date');
+        $date_q = $request->input('date_quantity');
+        $r = new ExtendPost();
+        $user = Auth::user();
+        $r->room_id = $room->id;
+        $r->user_id = $user->id;
+        $r->quantity = $date_q;
+        $r->unit_date = $unit_date;
+        $r->phone = $user->phone;
+        if($unit_date == 1) { // tuan
+            $total_price = $p*$date_q;
+        } else if ($unit_date == 2 ) { // thang
+            $total_price = $p*$date_q*4;
+        } else { // nam
+            $total_price = $p*$date_q*52;
+        }
+        $r->total_price = $total_price;
+        $r->save();
+
+        // end luu thoi gian muon hien thi
+
         if ($request->hasFile('detailImage')) {
             $file = $request->file('detailImage');
             $path_upload = 'uploads/room/';
@@ -261,7 +289,7 @@ class OwnerController extends Controller
             };
         }
         $room->Facilities()->syncWithoutDetaching($facilities);
-        return redirect()->route('owner.room.index')->with('msg', 'Tạo Phòng Thành Công.Đợi Admin Duyệt');
+        return redirect()->route('owner.room.index')->with('msg', 'Tạo phòng thành công. Vui lòng đợi Admin duyệt !');
     }
 
     public function viewEditRoom($id)
@@ -339,6 +367,13 @@ class OwnerController extends Controller
         return json_encode($data); // lam js sau
     }
 
+    public function showDetailNoti($id)
+    {
+        $data = Notify::findOrFail($id);
+        return view('owner.showNoti', [
+            'data' => $data
+        ]);
+    }
     public function showProfile()
     {
         $user = Auth::user();

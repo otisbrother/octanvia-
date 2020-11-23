@@ -201,6 +201,51 @@ class AdminController extends Controller
         ], 200);
     }
 
+    public function getAllUnApprovedRoom()
+    {
+        $data = Room::where(['approval_id' => null, 'approval_date' => null])->get();
+        return view('backend.manageRequest.allUnApprovedRoom', [
+            'data' => $data,
+        ]);
+    }
+
+    public function approveRoom($room_id)
+    {
+        $user = Auth::user();
+        $room = Room::findOrFail($room_id);
+        // xu ly duyet bai dang
+        $time = ExtendPost::where([ 'room_id' => $room_id ,'approved_by' => null, 'approved_date' => null])->first();
+        $today = date('Y-m-d');
+        $room->public_date = $today;
+        $room->approval_date = $today;
+        $room->approval_id = $user->id;
+        $room->is_active = 1;
+        $room->is_approved = 1;
+        $quantity = $time->quantity;
+        $unit_date = $time->unit_date;
+        $extendInt = date('Y-m-d');
+        if($unit_date == 1) {
+            $extendInt = mktime(0, 0, 0, date('m'), date('d')+$quantity*7, date('Y') );
+        } else if ($unit_date == 2) {
+            $extendInt = mktime(0, 0, 0, date('m')+$quantity, date('d'), date('Y') );
+        } else {
+            $extendInt = mktime(0, 0, 0, date('m'), date('d'), date('Y')+$quantity );
+
+        }
+        $extend = date('Y-m-d', $extendInt);
+        $room->expired_date = $extend;
+        $room->save(); // xong xu ly duyet bai dang
+        // luu request ve thoi gian la da dc duyet
+        $time->approved_by = $user->id;
+        $time->approved_date = $today;
+        $time->save();
+        // gui thong bao ve cho owner
+        $title_msg = 'Bài đăng ' . $room->title . ' đã được duyệt!';
+        $msg = 'Chúng tôi đã tiến hành kiểm duyệt và bài đăng của bạn đạt tiêu chuẩn. Hiện nay bài đăng đã được hiển thị trên trang chủ.';
+        $this->sendNoti($title_msg, $msg, $room->user_id);
+        return redirect()->route('admin.room.show', ['id' => $room->id]);
+    }
+
     public function test()
     {
         $date = date('Y-m-d');
@@ -216,6 +261,7 @@ class AdminController extends Controller
 
         }
         $extend = date('Y-m-d', $extendInt);
-        dd($extend);
+        $time = ExtendPost::where([ 'room_id' => 14 ,'approved_by' => null, 'approved_date' => null])->first();
+        dd(date('Y-m-d'));
     }
 }

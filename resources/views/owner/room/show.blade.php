@@ -22,8 +22,6 @@
 </section>
 <section class="content">
     <div class="row">
-        <form role="form" action="{{route('owner.room.extend', ['roomID' => $data->roomType_id])}}"method="post" enctype="multipart/form-data">
-            @csrf
             <div class="col-md-6">
                 <div class="box box-primary">
                     <div class="box-body">
@@ -112,28 +110,31 @@
                             </tbody>
                         </table>
                     </div>
-                    @if ($getDate > $data->expired_date)
-                        <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Gia Hạn Bài Đăng</button>
-                            <span style="color: red"> Gia hạn để có thể tiếp tục hiển thị bài đăng</span>
-                        </div>
-                    @else
-                        @if ($data->canbe_edit == 1)
-                            <div class="box-footer">
-                                <a href="{{route('owner.room.edit', ['id'=> $data->id ])}}" class="btn btn-info">Sửa</a>
-                            </div>
+                        @if($data->approval_id == null || $data->approval_date == null)
+                             <p style="padding: 15px; color: red;">Bài đăng chưa được duyệt. Vui lòng đợi admin phê duyệt</p>
                         @else
-                            @if($show_Request == 1)
+                            @if ($getDate > $data->expired_date)
                                 <div class="box-footer">
-
-                                    <a href="{{route('owner.room.requestEdit', [ 'room_id' => $data->id ])}}" class="btn btn-info" >Yêu Cầu Quyền Sửa</a>
+                                    <button type="submit" class="btn btn-primary">Gia Hạn Bài Đăng</button>
+                                    <span style="color: red"> Gia hạn để có thể tiếp tục hiển thị bài đăng</span>
                                 </div>
                             @else
-                                <p style="padding: 15px; color: red;">Yêu cầu chỉnh sửa đã được gửi. Vui lòng đợi admin phê duyệt</p>
+                                @if ($data->canbe_edit == 1)
+                                    <div class="box-footer">
+                                        <a href="{{route('owner.room.edit', ['id'=> $data->id ])}}" class="btn btn-info">Sửa</a>
+                                    </div>
+                                @else
+                                    @if($show_Request == 1)
+                                        <div class="box-footer">
+
+                                            <a href="{{route('owner.room.requestEdit', [ 'room_id' => $data->id ])}}" class="btn btn-info" >Yêu Cầu Quyền Sửa</a>
+                                        </div>
+                                    @else
+                                         <p style="padding: 15px; color: red;">Yêu cầu chỉnh sửa đã được gửi. Vui lòng đợi admin phê duyệt</p>
+                                    @endif
+                                @endif
                             @endif
                         @endif
-                    @endif
-
                 </div>
             </div>
             <div class="col-md-6">
@@ -159,7 +160,6 @@
                     </div>
                 </div>
             </div>
-        </form>
     </div>
 </section>
 @endsection

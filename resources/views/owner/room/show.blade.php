@@ -28,8 +28,8 @@
                         <table class="table table-bordered">
                             <tbody>
                             <tr>
-                                <td><b>Id Loại Phòng</b></td>
-                                <td>{{ $data->roomType_id }}</td>
+                                <td><b>Loại phòng</b></td>
+                                <td>{{ \App\Room_type::findOrFail($data->roomType_id)->name }}</td>
                             </tr>
                             <tr>
                                 <td><b>Tiêu Đề</b></td>
@@ -57,7 +57,7 @@
                             </tr>
                             <tr>
                                 <td><b>Giá Phòng (VNĐ) </b></td>
-                                <td>{{ $data->price }}</td>
+                                <td>{{ number_format($data->price,0,",",".") }}</td>
                             </tr>
                             <tr>
                                 <td><b>Hình ảnh tiêu đề:</b></td>
@@ -77,11 +77,11 @@
                             </tr>
                             <tr>
                                 <td><b> Giá Điện / kWh </b></td>
-                                <td>{{ $data->electric_price}}</td>
+                                <td>{{ $data->electric_price}} VNĐ</td>
                             </tr>
                             <tr>
                                 <td><b> Giá Nước / m3 </b></td>
-                                <td>{{ $data->water_price}}</td>
+                                <td>{{ $data->water_price}} VNĐ</td>
                             </tr>
                             <tr>
                                 <td><b> Ngày Phê Duyệt </b></td>
@@ -115,7 +115,7 @@
                         @else
                             @if ($getDate > $data->expired_date)
                                 <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary">Gia Hạn Bài Đăng</button>
+                                    <a href="{{ route('owner.room.extendDate', ['id' => $data->id]) }}" class="btn btn-primary">Gia hạn bài đăng</a>
                                     <span style="color: red"> Gia hạn để có thể tiếp tục hiển thị bài đăng</span>
                                 </div>
                             @else

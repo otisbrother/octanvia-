@@ -36,12 +36,22 @@
                                 <td>{{ $user->CMND }}</td>
                             </tr>
                             <tr>
-                                <td><b>Người duyệt :</b></td>
-                                <td></td>
+                                @if($user->approval_id != null )
+                                    <td><b>Người duyệt :</b></td>
+                                    <td>{{ \App\User::findOrFail($user->approval_id)->name }}</td>
+                                @else
+                                    <td><b>Người duyệt :</b></td>
+                                    <td>Tài khoản chưa được duyệt</td>
+                                @endif
                             </tr>
                             <tr>
-                                <td><b>Ngày được duyệt :</b></td>
-                                <td></td>
+                                @if($user->date_approval != null )
+                                    <td><b>Ngày được duyệt :</b></td>
+                                    <td>{{ $user->date_approval }}</td>
+                                @else
+                                    <td><b>Ngày duyệt :</b></td>
+                                    <td>Tài khoản chưa được duyệt</td>
+                                @endif
                             </tr>
                             <tr>
                                 <td><b>Email :</b></td>
@@ -57,7 +67,7 @@
                             </tr>
                             <tr>
                                 <td><b>Hình ảnh:</b></td>
-                                <td><img src="{{ asset($user->avatar) }}" width="250"></td>
+                                <td><img src="{{ asset($user->image) }}" width="250" alt="Chưa có hình ảnh"></td>
                             </tr>
                             <tr>
                                 <td><b>Chức vụ</b></td>
@@ -69,9 +79,9 @@
                             </tr>
 
                             </tbody></table>
-                        @if($user->role_id == 2)
+                        @if($user->role_id == 2 && ($user->approval_id == null || $user->date_approval == null))
                             <div class="box-footer">
-                                <button type="" class="btn btn-primary">Duyệt</button>
+                                <a href="{{ route('admin.approveOwnerAccount', ['owner_id' => $user->id]) }}" class="btn btn-primary">Duyệt</a>
                             </div>
                         @endif
                     </div>

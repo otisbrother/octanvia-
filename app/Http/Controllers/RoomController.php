@@ -223,7 +223,7 @@ class RoomController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:10000'
         ]);
 
-        $room =  Room::findorFail($id); // khởi tạo model
+        $room =  Room::findOrFail($id); // khởi tạo model
         $room->roomType_id = $request->input('typeRoom');
         $room->title = $request->input('title');
         $room->address = $request->input('address');

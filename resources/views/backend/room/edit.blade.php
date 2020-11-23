@@ -168,7 +168,7 @@
                             @foreach($room_detailImages as $item)
                                 <div class="detail-Image" id="detailImage{{$item->id}}">
                                     <img width="180px" height="180px" src="{{ asset($item->image) }}" alt="detail-Image{{ $item->id }}">
-                                    <span class="icon-delete" onclick="destroyRoomImage({{ $item->id }})"><i class="fa fa-power-off"></i> </span>
+                                    <span class="icon-delete" onclick="destroyRoomImage({{ $item->id }}, {{ \Illuminate\Support\Facades\Auth::user()->role_id }})"><i class="fa fa-power-off"></i> </span>
 {{--                                    <p>Ảnh chi tiết {{ $item->id }}</p>--}}
                                     <div class="form-group">
                                         <label for="exampleInputFile"> Thay đổi ảnh chi tiết {{ $item->id }}</label>

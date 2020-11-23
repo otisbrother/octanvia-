@@ -1,4 +1,8 @@
-@extends('owner.layouts.main')
+@extends('backend.layouts.main')
+<?php
+    $role_id = \Illuminate\Support\Facades\Auth::user()->role_id;
+?>
+
 @section('content')
     <style>
         .allDetailImages {
@@ -27,7 +31,7 @@
     </style>
     <section class="content-header">
         <h1>
-            Chỉnh sửa Thông Tin Nhà Trọ <a href="{{route('owner.room.index')}}" class="btn btn-success pull-right"><i class="fa fa-list"></i> Danh Sách</a>
+            Chỉnh sửa Thông Tin Nhà Trọ <a href="{{ route('owner.room.index') }}" class="btn btn-success pull-right"><i class="fa fa-list"></i> Danh Sách</a>
         </h1>
     </section>
     <section class="content">
@@ -57,7 +61,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tỉnh/Thành Phố</label>
-                                <select class="form-control w-50" name="city" required>
+                                <select class="form-control w-50" name="city" id="city" required>
                                     <option value="{{ $pickedCity->id }}">{{ $pickedCity->name }}</option>
                                     @foreach($city as $t_city)
                                         <option value="{{$t_city->id}}">{{$t_city->name}}</option>
@@ -66,7 +70,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Quận/Huyện</label>
-                                <select class="form-control w-50" name="district" required>
+                                <select class="form-control w-50" name="district" id="district" required>
                                     <option value="{{$pickedDistrict->id}}">{{$pickedDistrict->name}}</option>
                                     @foreach($district as $t_district)
                                         <option value="{{$t_district->id}}">{{$t_district->name}}</option>
@@ -110,6 +114,10 @@
                             <div class="form-group">
                                 <label for="exampleInputFile">Ngày Phê Duyệt</label>
                                 <input value="{{ $room->approval_date }}" type="text" class="form-control" id="approvalDate" name="approvalDate" placeholder="Chưa được phê duyệt" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputFile">Ngày Hết Hạn</label>
+                                <input value="{{ $room->expired_date }}" type="text" class="form-control" id="expiredDate" name="expiredDate" placeholder="Ngày hết hạn" disabled>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputFile">Giá Điện (VNĐ) / kWh</label>
@@ -164,7 +172,7 @@
                             @foreach($room_detailImages as $item)
                                 <div class="detail-Image" id="detailImage{{$item->id}}">
                                     <img width="180px" height="180px" src="{{ asset($item->image) }}" alt="detail-Image{{ $item->id }}">
-                                    <span class="icon-delete" onclick="destroyRoomImage({{ $item->id }})"><i class="fa fa-power-off"></i> </span>
+                                    <span class="icon-delete" onclick="destroyRoomImage({{ $item->id }}, {{ \Illuminate\Support\Facades\Auth::user()->role_id }})"><i class="fa fa-power-off"></i> </span>
                                     {{--                                    <p>Ảnh chi tiết {{ $item->id }}</p>--}}
                                     <div class="form-group">
                                         <label for="exampleInputFile"> Thay đổi ảnh chi tiết {{ $item->id }}</label>
@@ -213,4 +221,13 @@
             </form>
         </div>
     </section>
+@endsection
+@section('my_javascript')
+    <script>
+        $('#city').change(function () {
+            id = $(this).val();
+            $('#district').html('');
+            getAllDistrict(id);
+        })
+    </script>
 @endsection

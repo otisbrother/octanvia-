@@ -55,15 +55,19 @@ Route::group(['prefix' => 'admin','as' => 'admin.', 'middleware' => ['checkLogin
     Route::resource('comment', 'CommentController');
     Route::get('/report/getAllUnApprovedReports', 'ReportController@getAllUnApprovedReports')->name('report.getAllUnApprovedReports');
     Route::resource('report', 'ReportController');
-    Route::delete('/roomimage/{id}', 'RoomController@deleteRoomImage')->name('room/deleteRoomImage');
+    Route::delete('/roomimage/{id}', 'RoomController@deleteRoomImage')->name('room.deleteRoomImage');
     Route::get('/showAllExtendRoomRequest', 'AdminController@showAllExtendRoomRequest')->name('showAllExtendRoomRequest');
     Route::get('/test', 'AdminController@test');
     Route::get('/approveExtendRequest/{request_id}','AdminController@extendDate')->name('approveExtendRequest');
     Route::get('/deleteRequest/writeReason/{request_id}', 'AdminController@writeReason')->name('deleteRequest.writeReason');
     Route::post('/deleteRequest/refuseRequest/{request_id}', 'AdminController@refuseExtendDate')->name('deleteRequest.refuseExtendDate');
-    Route::get('/approveOwnerAccount/{owner_id}', 'AdminController@approveOwnerAccount');
-    Route::get('/getAllUnApprovedRoom/', 'AdminController@getAllUnApprovedRoom')->name('getAllUnApprovedRoom');
+    Route::get('/approveOwnerAccount/{owner_id}', 'AdminController@approveOwnerAccount')->name('approveOwnerAccount');
+    Route::get('/getAllUnApprovedRoom', 'AdminController@getAllUnApprovedRoom')->name('getAllUnApprovedRoom');
     Route::get('/approveRoom/{id}', 'AdminController@approveRoom')->name('approveRoom');
+    Route::get('/getAllRequestEditRoom', 'AdminController@getAllRequestEditRoom')->name('getAllRequestEditRoom');
+    Route::get('/approveRequestEditRoom/{request_id}', 'AdminController@approveEditRoom');
+    Route::get('/declineRequestEditRoom/{request_id}', 'AdminController@declineEditRoom');
+
 });
 
 Route::get('/owner/login', 'OwnerController@login')->name('owner.login');
@@ -74,13 +78,14 @@ Route::post('/owner/postRegister', 'OwnerController@postRegister')->name('owner.
 
 Route::group(['prefix' => 'owner','as' => 'owner.', 'middleware' => ['checkLoginOwner']], function() {
     Route::get('/','OwnerController@getAllRoom')->name('room.index');
-    Route::get('/show/{id}', 'OwnerController@showRoomDetail')->name('room.show');
-    Route::get('/create', 'OwnerController@viewCreateRoom')->name('room.create');
-    Route::post('/postCreateRoom', 'OwnerController@storeRoom')->name('room.storeRoom');
-    Route::get('/edit/{id}', 'OwnerController@viewEditRoom')->name('room.edit');
-    Route::post('/postEdit', 'OwnerController@update')->name('room.update');
+    Route::get('/room/show/{id}', 'OwnerController@showRoomDetail')->name('room.show');
+    Route::get('/room/create', 'OwnerController@viewCreateRoom')->name('room.create');
+    Route::post('/room/storeRoom', 'OwnerController@storeRoom')->name('room.storeRoom');
+    Route::get('/room/edit/{id}', 'OwnerController@viewEditRoom')->name('room.edit');
+    Route::match( ['put','patch'],'room/updateRoom/{id}', 'OwnerController@updateRoom')->name('room.update');
     Route::get('/room/extendDate/{roomId}', 'OwnerController@extendDate')->name('room.extendDate');
     Route::post('/room/extendDate/{roomId}', 'OwnerController@require_extendDate')->name('room.postextendDate');
+    Route::delete('/roomimage/{id}', 'OwnerController@deleteRoomImage');
 //    Route::post('/extend/{roomId}', 'OwnerController@viewExtend')->name('room.extend');
     Route::get('/requestEditRoom/{roomId}', 'OwnerController@requestEditRoom')->name('room.requestEdit');
     Route::post('/sendRequestEditRoom', 'OwnerController@sendRequestEditRoom')->name('room.sendRequestEditRoom');

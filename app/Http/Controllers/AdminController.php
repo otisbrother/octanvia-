@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\District;
 use App\ExtendPost;
 use App\Notify;
+use App\RequestEditRoom;
 use App\Room;
 use App\User;
 use Illuminate\Http\Request;
@@ -196,9 +197,7 @@ class AdminController extends Controller
         $account->approval_id = $user->id;
         $account->date_approval = now();
         $account->save();
-        return response()->json([
-            'status' => true
-        ], 200);
+        return redirect()->route('admin.user.show', [ 'id' => $owner_id ])->with('msg', 'Tài khoản đã được duyệt');
     }
 
     public function getAllUnApprovedRoom()
@@ -234,6 +233,7 @@ class AdminController extends Controller
         }
         $extend = date('Y-m-d', $extendInt);
         $room->expired_date = $extend;
+//        dd($extend);
         $room->save(); // xong xu ly duyet bai dang
         // luu request ve thoi gian la da dc duyet
         $time->approved_by = $user->id;
@@ -244,6 +244,52 @@ class AdminController extends Controller
         $msg = 'Chúng tôi đã tiến hành kiểm duyệt và bài đăng của bạn đạt tiêu chuẩn. Hiện nay bài đăng đã được hiển thị trên trang chủ.';
         $this->sendNoti($title_msg, $msg, $room->user_id);
         return redirect()->route('admin.room.show', ['id' => $room->id]);
+    }
+
+    public function getAllRequestEditRoom()
+    {
+        $data = RequestEditRoom::where(['approved_by' => null])->get();
+        return view('backend.manageRequest.allUnApprovedRequestEditRoom', [
+            'data' => $data,
+            'title' => 'Danh sách phòng yêu cầu chỉnh sửa'
+        ]);
+    }
+
+    public function approveEditRoom($request_id)
+    {
+        $user = Auth::user();
+        $request = RequestEditRoom::findOrFail($request_id);
+
+        $room = Room::findOrFail($request->room_id);
+        $room->canbe_edit = 1;
+        $room->save();
+        $request->approved_by = $user->id;
+        $request->save();
+        $msg_title = 'Yêu cầu chỉnh sửa bài đăng ' . $room->title . ' được chấp nhận';
+        $msg = 'Với lý do ' . $request->reason . '. Chúng tôi đã chấp nhận và bạn có quyền chỉnh sửa thông tin phòng 1 lần. Cảm ơn.';
+        $this->sendNoti($msg_title, $msg, $request->user_id);
+
+        return response()->json([
+            'status' => true
+        ], 200);
+    }
+
+    public function declineEditRoom($request_id)
+    {
+        $user = Auth::user();
+        $request = RequestEditRoom::findOrFail($request_id);
+
+        $room = Room::findOrFail($request->room_id);
+
+        $request->approved_by = $user->id;
+        $request->save();
+        $msg_title = 'Yêu cầu chỉnh sửa bài đăng ' . $room->title . 'không được chấp nhận';
+        $msg = 'Với lý do ' . $request->reason . '. Chúng tôi rất tiếc không thể cho bạn chỉnh sửa bài đăng. Vui lòng liên hệ trực tiếp công ty nếu cần.';
+        $this->sendNoti($msg_title, $msg, $request->user_id);
+
+        return response()->json([
+            'status' => true
+        ], 200);
     }
 
     public function test()

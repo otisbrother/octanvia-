@@ -26,7 +26,7 @@
     {{--                            tiêu đề--}}
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tên Tiêu Đề</label>
-                                <input type="text" class="form-control" id="title" name="title" placeholder="Nhập tên tiêu đề" required>
+                                <input type="text" class="form-control" id="title" name="title" placeholder="Nhập tên tiêu đề" onchange="validateDetailImages()" required>
                                 <span class="form-message" style="color: red"></span>
                             </div>
     {{--                            tỉnh/thành phố--}}
@@ -51,7 +51,7 @@
     {{--                            địa chỉ--}}
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Địa chỉ chính xác (số nhà ...) </label>
-                                <input type="text" class="form-control" id="address" name="address" placeholder="Nhập địa chỉ" required>
+                                <input type="text" class="form-control" id="address" name="address" placeholder="Nhập địa chỉ" onchange="validateDetailImages()" required>
                                 <span class="form-message" style="color: red"></span>
                             </div>
     {{--                            số lượng phòng--}}
@@ -133,7 +133,9 @@
                             </div>
                         </div>
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary" >Tạo</button>
+                            <p id="msg"></p>
+
+                            <button type="submit" id="submit_btn" class="btn btn-primary" >Tạo</button>
                         </div>
                     </div>
                 </div>
@@ -158,7 +160,7 @@
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="exampleInputFile">Ảnh Phòng Trọ</label>
-                                <input type="file" class="" id="image" name="detailImage[]" multiple>
+                                <input type="file" class="" id="detail_images" name="detailImage[]" onchange="validateDetailImages()" multiple>
                             </div>
                         </div>
                         <!-- /.box-body -->
@@ -206,5 +208,21 @@
             $('#district').html('');
             getAllDistrict(id);
         })
+
+
+        function validateDetailImages() {
+            let msg = '';
+            var quantity = $('#detail_images').get(0).files.length;
+            if(quantity < 3)
+            {
+                msg = 'Vui lòng thêm ít nhất 3 ảnh chi tiết phòng trọ.';
+                $('#msg').css('color', '#ff0000');
+                $('#msg').html(msg);
+                $('#submit_btn').attr('disabled', 'true');
+            } else {
+                $('#msg').html('');
+                $('#submit_btn').removeAttr('disabled');
+            }
+        }
     </script>
 @endsection

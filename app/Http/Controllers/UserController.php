@@ -6,6 +6,8 @@ use App\User;
 use App\User_comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use PharIo\Manifest\Email;
 
 class UserController extends Controller
 {
@@ -200,6 +202,35 @@ class UserController extends Controller
             'data' => $data // truyền dữ liệu sang view Index
         ]);
     }
+
+    public function checkExistEmail($new_email)
+    {
+        $stt = true;
+        $test = User::where(['email' => $new_email])->first();
+        if($test != null)
+        {
+            $stt = false;
+        }
+        return json_encode($stt);
+    }
+
+    public function checkOldPassword($password)
+    {
+        $result = false;
+        $user = Auth::user();
+        if(Hash::check($password, $user->password)) {
+            $result = true;
+        }
+        return json_encode($result);
+    }
+    public function changePassword(Request $request)
+    {
+        $user = Auth::user();
+        $user->password = bcrypt($request->input('new_password'));
+        $user->save();
+        return redirect()->route('owner.showProfile')->with('msg', 'Thay đổi mật khẩu thành công.');
+    }
+
 
 
 

@@ -71,6 +71,9 @@
 
                             </tbody></table>
                     </div>
+                    <div class="box-footer">
+                        <a href="{{ route('owner.changePassword') }}" class="btn btn-google">Thay đổi mật khẩu</a>
+                    </div>
                 </div>
 
                 <!-- /.box -->

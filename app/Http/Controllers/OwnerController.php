@@ -496,4 +496,12 @@ class OwnerController extends Controller
             'status' => true
         ], 200);
     }
+
+    public function changePassword()
+    {
+        return view('owner.changePassword');
+    }
+
+
+
 }

@@ -18,7 +18,9 @@
     <link rel="stylesheet" href="/backend/dist/css/AdminLTE.min.css">
     <!-- iCheck -->
     <link rel="stylesheet" href="/backend/plugins/iCheck/square/blue.css">
-
+    <script type="text/javascript">
+        var base_url = '{{ url('/') }}';
+    </script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -58,8 +60,9 @@
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input name="email" type="email" class="form-control" placeholder="Email : hovaten@gmail.com" pattern=".+@.+(\.[a-z]{2,3})" title="Kiểm tra lại định dạng email" required>
+                <input name="email" id="email" type="email" class="form-control" placeholder="Email : hovaten@gmail.com" pattern=".+@.+(\.[a-z]{2,3})" title="Kiểm tra lại định dạng email" onchange="checkExistsEmail()" required>
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                <p id="email-msg"></p>
 {{--                @if ($errors->has('email'))--}}
 {{--                    <span class="invalid-feedback" role="alert" style="color:red;">{{ $errors->first('email') }}</span>--}}
 {{--                @endif--}}
@@ -80,20 +83,20 @@
                 <input type="file" id="avatar" name="avatar">
             </div>
             @if (session('msg'))
-                <div class="form-group has-feedback"><a href="javascript:void(0)" style="color: red">{{ session('msg') }}</a></div>
+                <div class="form-group has-feedback"><a href="javascript:void(0)" style="color: #008000">{{ session('msg') }}</a></div>
             @endif
 
             <div class="row">
                 <div class="col-xs-8">
                     <div class="checkbox icheck">
                         <label>
-                             <a href="{{route('admin.login')}}"><span> Đã có tài khoản ?</span></a>
+                             <a href="{{route('owner.login')}}"><span> Đã có tài khoản ?</span></a>
                         </label>
                     </div>
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4">
-                    <button id="submit" type="submit" class="btn btn-primary btn-block btn-flat">Đăng Ký</button>
+                    <button id="submit_btn" type="submit" class="btn btn-primary btn-block btn-flat">Đăng Ký</button>
                 </div>
                 <!-- /.col -->
             </div>
@@ -122,10 +125,45 @@
         var pass = document.getElementById('password').value;
         var rePass = document.getElementById('re_password').value;
         if (pass != rePass) {
-            check = false;
             document.getElementById('checkPass').innerHTML = 'Mật khẩu không trùng khớp';
+            $('#submit_btn').attr('disabled', 'true');
         }else {
             document.getElementById('checkPass').innerHTML = '';
+            $('#submit_btn').removeAttr('disabled');
+
+        }
+
+    }
+
+    function checkExistsEmail() {
+        let email = $('#email').val();
+        if(email == '') {
+            $('#email-msg').html('');
+            $('#submit_btn').removeAttr('disabled');
+        } else {
+            let msg = '';
+            $.ajax({
+                url: base_url + '/checkExistsEmail/'+email, // base_url được khai báo ở đầu page == http://renthouse.co
+                type: 'GET',
+                data: {}, // dữ liệu truyền sang nếu có
+                dataType: "json", // kiểu dữ liệu trả về
+                success: function (response) { // success : kết quả trả về sau khi gửi request ajax
+                    if(response != true) {
+                        $('#submit_btn').attr('disabled', 'true');
+                        msg = 'Email này đã tồn tại. Vui lòng chọn email khác!';
+                        $('#email-msg').html(msg);
+                        $('#email-msg').css('color', 'red');
+                    } else {
+                        $('#submit_btn').removeAttr('disabled');
+                        msg = 'Email này có thể sử dụng';
+                        $('#email-msg').html(msg);
+                        $('#email-msg').css('color', '#00fa04');
+                    }
+                },
+                error: function (e) { // lỗi nếu có
+                    console.log(e.message);
+                }
+            });
         }
 
     }

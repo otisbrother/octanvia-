@@ -39,9 +39,11 @@ Route::post('/admin/postLogin', 'AdminController@postLogin')->name('admin.postLo
 
 Route::get('/getListDistrict/{city_id}', 'AdminController@getListDistrict');
 
+Route::get('/checkExistsEmail/{new_email}', 'UserController@checkExistEmail');
 
+Route::get('/checkOldPassword/{password}', 'UserController@checkOldPassword');
 
-
+Route::post('/user/changePassword', 'UserController@changePassword')->name('postchangePassword');
 
 Route::group(['prefix' => 'admin','as' => 'admin.', 'middleware' => ['checkLogin']], function() {
     Route::get('/', 'AdminController@index')->name('dashboard');
@@ -91,4 +93,5 @@ Route::group(['prefix' => 'owner','as' => 'owner.', 'middleware' => ['checkLogin
     Route::post('/sendRequestEditRoom', 'OwnerController@sendRequestEditRoom')->name('room.sendRequestEditRoom');
     Route::get('/showProfile', 'OwnerController@showProfile')->name('showProfile');
     Route::get('/showNoti/{id}', 'OwnerController@showDetailNoti')->name('showNoti');
+    Route::get('/changePassword', 'OwnerController@changePassword')->name('changePassword');
 });

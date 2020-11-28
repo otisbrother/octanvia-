@@ -320,3 +320,36 @@ function declineRequestEditRoom(id) {
         });
     }
 }
+
+function checkExistsEmail() {
+        let email = $('#email').val();
+        if(email == '') {
+            $('#email-msg').html('');
+            $('#submit_btn').removeAttr('disabled');
+        } else {
+            let msg = '';
+            $.ajax({
+                url: base_url + '/checkExistsEmail/'+email, // base_url được khai báo ở đầu page == http://renthouse.co
+                type: 'GET',
+                data: {}, // dữ liệu truyền sang nếu có
+                dataType: "json", // kiểu dữ liệu trả về
+                success: function (response) { // success : kết quả trả về sau khi gửi request ajax
+                    if(response != true) {
+                        $('#submit_btn').attr('disabled', 'true');
+                        msg = 'Email này đã tồn tại. Vui lòng chọn email khác!';
+                        $('#email-msg').html(msg);
+                        $('#email-msg').css('color', 'red');
+                    } else {
+                        $('#submit_btn').removeAttr('disabled');
+                        msg = 'Email này có thể sử dụng';
+                        $('#email-msg').html(msg);
+                        $('#email-msg').css('color', '#00fa04');
+                    }
+                },
+                error: function (e) { // lỗi nếu có
+                    console.log(e.message);
+                }
+            });
+        }
+
+}

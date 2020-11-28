@@ -70,6 +70,15 @@
                 </div>
                 <!-- /.col -->
             </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="checkbox icheck">
+                        <label>
+                            <a href="{{route('owner.register')}}"><span> Đăng ký tài khoản </span></a>
+                        </label>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
     <!-- /.login-box-body -->

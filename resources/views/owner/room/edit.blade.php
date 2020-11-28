@@ -1,4 +1,4 @@
-@extends('backend.layouts.main')
+@extends('owner.layouts.main')
 <?php
     $role_id = \Illuminate\Support\Facades\Auth::user()->role_id;
 ?>

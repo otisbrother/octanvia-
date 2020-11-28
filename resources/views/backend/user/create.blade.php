@@ -49,9 +49,10 @@
                                 <label for="exampleInputEmail1">Chứng minh nhân dân / Căn cước công dân</label>
                                 <input type="text" class="form-control" id="cmnd" name="cmnd" placeholder="Nhập số ">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" id="email-form">
                                 <label for="exampleInputEmail1">Email</label>
-                                <input type="text" class="form-control" id="email" name="email" placeholder="Nhập Email">
+                                <input type="text" class="form-control" id="email" name="email" onchange="checkExistsEmail()" placeholder="Nhập Email" required>
+                                <p id="email-msg"></p>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Mật khẩu</label>
@@ -70,7 +71,7 @@
                         <!-- /.box-body -->
 
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Tạo</button>
+                            <button type="submit" id="submit_btn" class="btn btn-primary">Tạo</button>
                         </div>
                     </form>
                 </div>

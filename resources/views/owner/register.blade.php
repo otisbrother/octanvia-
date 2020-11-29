@@ -48,8 +48,9 @@
                 <input type="text" class="form-control" id="birthday" name="birthday" placeholder="Ngày sinh dd/mm/yy">
             </div>
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" name="cmnd" placeholder="CMND" required>
+                <input type="text" class="form-control" id="cmnd" name="cmnd" placeholder="CMND" onchange="checkExistsCmnd()" required>
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                <p id="cmnd-msg"></p>
             </div>
             <div class="form-group has-feedback">
                 <input type="text" class="form-control" name="address" placeholder="Địa Chỉ" required>
@@ -158,6 +159,37 @@
                         msg = 'Email này có thể sử dụng';
                         $('#email-msg').html(msg);
                         $('#email-msg').css('color', '#00fa04');
+                    }
+                },
+                error: function (e) { // lỗi nếu có
+                    console.log(e.message);
+                }
+            });
+        }
+
+    }
+
+    function checkExistsCmnd() {
+        let cmnd = $('#cmnd').val();
+        if(cmnd == '') {
+            $('#cmnd-msg').html('');
+            $('#submit_btn').removeAttr('disabled');
+        } else {
+            let msg = '';
+            $.ajax({
+                url: base_url + '/checkExistsCmnd/'+cmnd, // base_url được khai báo ở đầu page == http://renthouse.co
+                type: 'GET',
+                data: {}, // dữ liệu truyền sang nếu có
+                dataType: "json", // kiểu dữ liệu trả về
+                success: function (response) { // success : kết quả trả về sau khi gửi request ajax
+                    if(response != true) {
+                        $('#submit_btn').attr('disabled', 'true');
+                        msg = 'Số chứng minh nhân dân / căn cước này đã tồn tại!';
+                        $('#cmnd-msg').html(msg);
+                        $('#cmnd-msg').css('color', 'red');
+                    } else {
+                        $('#submit_btn').removeAttr('disabled');
+                        $('#cmnd-msg').html('');
                     }
                 },
                 error: function (e) { // lỗi nếu có

@@ -5,7 +5,7 @@ $all_noti = \App\Notify::where(['receive_id' => $user->id])->get();
 
 <header class="main-header">
     <!-- Logo -->
-    <a href="{{ route('admin.dashboard') }}" class="logo">
+    <a href="{{ route('owner.room.index') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini">RH.co</span>
         <!-- logo for regular state and mobile devices -->

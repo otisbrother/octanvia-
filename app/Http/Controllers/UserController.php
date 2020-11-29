@@ -214,6 +214,17 @@ class UserController extends Controller
         return json_encode($stt);
     }
 
+    public function checkExistCmnd($new_cmnd)
+    {
+        $stt = true;
+        $test = User::where(['cmnd' => $new_cmnd])->first();
+        if($test != null)
+        {
+            $stt = false;
+        }
+        return json_encode($stt);
+    }
+
     public function checkOldPassword($password)
     {
         $result = false;

@@ -502,6 +502,53 @@ class OwnerController extends Controller
         return view('owner.changePassword');
     }
 
+    public function editProfile()
+    {
+        $user = Auth::user();
+
+        return view('owner.editProfile', [
+            'user'=> $user
+        ]);
+    }
+
+    public function updateProfile(Request $request)
+    {
+//        dd($request);
+//
+//        $validatedData = $request->validate([
+//            'name' => 'required|max:255',
+//            'email' => 'required|email',
+//            'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:10000'
+//        ]);
+
+        $user = Auth::user();
+
+        //luu vào csdl
+        $user->name = $request->input('name'); // họ tên
+        $user->birthday = $request->input('birthday');
+        $user->phone = $request->input('phone');
+        $user->address = $request->input('address');
+
+        if ($request->hasFile('new_avatar')) {
+            // xóa file cũ
+            @unlink(public_path($user->avatar)); // hàm unlink của PHP không phải laravel , chúng ta thêm @ đằng trước tránh bị lỗi
+            // get file
+            $file = $request->file('new_avatar');
+            // get ten
+            $filename = time().'_'.$file->getClientOriginalName();
+            // duong dan upload
+            $path_upload = 'uploads/user/';
+            // upload file
+            $request->file('new_avatar')->move($path_upload,$filename);
+
+            $user->image = $path_upload.$filename;
+        }
+
+        $user->save();
+
+        // chuyen dieu huong trang
+        return redirect()->route('owner.showProfile', ['user' => $user])->with('msg', 'Cập nhật tài khoản thành công.');
+    }
 
 
 }

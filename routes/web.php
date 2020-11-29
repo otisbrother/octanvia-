@@ -41,6 +41,9 @@ Route::get('/getListDistrict/{city_id}', 'AdminController@getListDistrict');
 
 Route::get('/checkExistsEmail/{new_email}', 'UserController@checkExistEmail');
 
+Route::get('/checkExistsCmnd/{new_cmnd}', 'UserController@checkExistCmnd');
+
+
 Route::get('/checkOldPassword/{password}', 'UserController@checkOldPassword');
 
 Route::post('/user/changePassword', 'UserController@changePassword')->name('postchangePassword');
@@ -94,4 +97,6 @@ Route::group(['prefix' => 'owner','as' => 'owner.', 'middleware' => ['checkLogin
     Route::get('/showProfile', 'OwnerController@showProfile')->name('showProfile');
     Route::get('/showNoti/{id}', 'OwnerController@showDetailNoti')->name('showNoti');
     Route::get('/changePassword', 'OwnerController@changePassword')->name('changePassword');
+    Route::get('/editProfile', 'OwnerController@editProfile')->name('editProfile');
+    Route::match( ['put','patch'],'/updateProfile', 'OwnerController@updateProfile')->name('updateProfile');
 });

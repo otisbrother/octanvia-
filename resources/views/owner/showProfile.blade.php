@@ -65,7 +65,7 @@
                             </tr>
                             <tr>
                                 <td><b>Hình ảnh:</b></td>
-                                <td><img src="{{ asset($user->avatar) }}" width="250"></td>
+                                <td><img src="{{ asset($user->image) }}" width="250"></td>
                             </tr>
 
 
@@ -73,6 +73,8 @@
                     </div>
                     <div class="box-footer">
                         <a href="{{ route('owner.changePassword') }}" class="btn btn-google">Thay đổi mật khẩu</a>
+                        <a href="{{ route('owner.editProfile') }}" class="btn btn-instagram">Chỉnh sửa tài khoản</a>
+
                     </div>
                 </div>
 

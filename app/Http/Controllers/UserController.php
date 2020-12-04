@@ -245,6 +245,7 @@ class UserController extends Controller
 
 
 
+
 //    public function postComment(Request $request) // viet san de day
 //    {
 //

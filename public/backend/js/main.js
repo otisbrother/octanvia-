@@ -353,3 +353,54 @@ function checkExistsEmail() {
         }
 
 }
+
+function markAsRead(noti_id, pos) {
+
+        $.ajax({
+            url: base_url + '/owner/markAsRead/'+ noti_id, // base_url được khai báo ở đầu page == http://renthouse.co
+            type: 'GET',
+            data: {}, // dữ liệu truyền sang nếu có
+            dataType: "json", // kiểu dữ liệu trả về
+            success: function (response) { // success : kết quả trả về sau khi gửi request ajax
+                // dữ liệu trả về là một object nên để gọi đến status chúng ta sẽ gọi như bên dưới
+                if (response.status != 'undefined' && response.status == true && pos == 'index') {
+                    // xóa dòng vừa được click delete
+                    $('.item-'+ noti_id).css('background-color', '#c2d6d6');
+                    $('#be_seen-'+ noti_id).html('Đã xem');
+                    $('#markAsRead-btn-'+noti_id).remove();
+                    let my_tag = `<a href="javascript:void(0)" class="btn btn-danger" id="markAsUnRead-btn-${noti_id}" onclick="markAsUnRead( ${noti_id} , 'index')" >Đánh dấu là chưa xem</a>`;
+                    $('#action-' + noti_id).append(my_tag);
+
+                }
+            },
+            error: function (e) { // lỗi nếu có
+                console.log(e.message);
+            }
+        });
+}
+
+function markAsUnRead(noti_id, pos) {
+
+    $.ajax({
+        url: base_url + '/owner/markAsUnRead/'+ noti_id, // base_url được khai báo ở đầu page == http://renthouse.co
+        type: 'GET',
+        data: {}, // dữ liệu truyền sang nếu có
+        dataType: "json", // kiểu dữ liệu trả về
+        success: function (response) { // success : kết quả trả về sau khi gửi request ajax
+            // dữ liệu trả về là một object nên để gọi đến status chúng ta sẽ gọi như bên dưới
+            if (response.status != 'undefined' && response.status == true && pos == 'index') {
+                // xóa dòng vừa được click delete
+                $('.item-'+ noti_id).css('background-color', '#ffffff');
+                $('#be_seen-'+ noti_id).html('Chưa xem');
+                $('#markAsUnRead-btn-' + noti_id).remove();
+                let my_tag = `<a href="javascript:void(0)" class="btn btn-danger" id="markAsRead-btn-${noti_id}" onclick="markAsRead( ${noti_id} , 'index')" >Đánh dấu là đã xem</a>`;
+                $('#action-' + noti_id).append(my_tag);
+
+            }
+        },
+        error: function (e) { // lỗi nếu có
+            console.log(e.message);
+        }
+    });
+}
+

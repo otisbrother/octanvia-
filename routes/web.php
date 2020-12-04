@@ -96,7 +96,11 @@ Route::group(['prefix' => 'owner','as' => 'owner.', 'middleware' => ['checkLogin
     Route::post('/sendRequestEditRoom', 'OwnerController@sendRequestEditRoom')->name('room.sendRequestEditRoom');
     Route::get('/showProfile', 'OwnerController@showProfile')->name('showProfile');
     Route::get('/showNoti/{id}', 'OwnerController@showDetailNoti')->name('showNoti');
+    Route::get('/showAllNoti', 'OwnerController@showAllNoti')->name('showAllNoti');
     Route::get('/changePassword', 'OwnerController@changePassword')->name('changePassword');
     Route::get('/editProfile', 'OwnerController@editProfile')->name('editProfile');
     Route::match( ['put','patch'],'/updateProfile', 'OwnerController@updateProfile')->name('updateProfile');
+    Route::get('/markAsRead/{noti_id}', 'OwnerController@markAsRead')->name('markNotiAsRead');
+    Route::get('/markAsUnRead/{noti_id}', 'OwnerController@markAsUnRead')->name('markNotiAsUnRead');
+
 });

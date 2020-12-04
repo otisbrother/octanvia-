@@ -2,7 +2,7 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Sửa thông tin người dùng <a href="#" class="btn btn-success pull-right"><i class="fa fa-list"></i> Danh Sách User</a>
+            Sửa thông tin người dùng <a href="{{ route('owner.room.index') }}" class="btn btn-success pull-right"><i class="fa fa-list"></i> Danh Sách Phòng Trọ</a>
         </h1>
     </section>
 

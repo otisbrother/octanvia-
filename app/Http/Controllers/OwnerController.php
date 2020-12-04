@@ -465,8 +465,18 @@ class OwnerController extends Controller
     public function showDetailNoti($id)
     {
         $data = Notify::findOrFail($id);
+        $data->be_seen = 1;
+        $data->save();
         return view('owner.showNoti', [
             'data' => $data
+        ]);
+    }
+
+    public function showAllNoti()
+    {
+        $data = Notify::all();
+        return view('owner.viewAllNoti', [
+            'data' => $data,
         ]);
     }
 
@@ -548,6 +558,28 @@ class OwnerController extends Controller
 
         // chuyen dieu huong trang
         return redirect()->route('owner.showProfile', ['user' => $user])->with('msg', 'Cập nhật tài khoản thành công.');
+    }
+
+    public function markAsRead($noti_id)
+    {
+        $noti = Notify::findOrFail($noti_id);
+        $noti->be_seen = 1;
+        $noti->save();
+
+        return response()->json([
+            'status' => true
+        ], 200);
+    }
+
+    public function markAsUnRead($noti_id)
+    {
+        $noti = Notify::findOrFail($noti_id);
+        $noti->be_seen = 0;
+        $noti->save();
+
+        return response()->json([
+            'status' => true
+        ], 200);
     }
 
 

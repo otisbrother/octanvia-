@@ -144,19 +144,11 @@
                         @foreach($room_detailImages as $item)
                             <div class="listImg">
                                 <div class="Pad-img">
-                                    <img src="{{ asset($item->image) }}">
+                                    <img src="{{ asset($item->image) }}" style="border-radius: 5px;">
                                 </div>
                             </div>
                         @endforeach
-                        <table class="table table-bordered">
-                            <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            </tbody>
-                        </table>
+
                     </div>
                 </div>
             </div>

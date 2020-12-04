@@ -3,7 +3,7 @@
 
     <section class="content-header">
         <h1>
-            Danh Sách Phòng Trọ <a href="{{route('owner.room.create')}}" class="btn btn-info pull-right"><i class="fa fa-plus"></i> Thêm Phòng Trọ</a>
+            Tất cả thông báo <a href="{{route('owner.room.index')}}" class="btn btn-info pull-right"><i class="fa fa-plus"></i> Danh sách phòng trọ</a>
         </h1>
     </section>
     @if (session('msg'))
@@ -35,33 +35,27 @@
                         <table class="table table-hover">
                             <tbody>
                             <tr>
-                                <th>ID Bài Viết</th>
-                                <th>Tên Tiêu Đề</th>
-                                <th>Loại Phòng</th>
-                                <th>Địa Chỉ</th>
-                                <th>Giá Phòng</th>
-                                <th>Hình ảnh</th>
-                                <th>Hiển thị</th>
+                                <th>Tiêu đề</th>
+                                <th>Nội dung</th>
                                 <th>Trạng thái</th>
+                                <th>Ngày nhận</th>
                                 <th class="text-center">Hành động</th>
                             </tr>
                             </tbody>
-                            @foreach($list as $key => $item)
-                                <tr class="item-{{ $item->id }}"> <!-- Thêm Class Cho Dòng -->
-                                    <td>{{ $item->id }}</td>
+                            @foreach($data as $key => $item)
+                                <tr class="item-{{ $item->id }}" @if($item->be_seen == 1) style="background-color: #c2d6d6 " @endif > <!-- Thêm Class Cho Dòng -->
                                     <td>{{ $item->title }}</td>
-                                    <td>{{ \App\Room_type::findOrFail($item->roomType_id)->name  }}</td>
-                                    <td>{{ $item->address }}</td>
-                                    <td>{{  number_format($item->price,0,",",".") }} Đ</td>
-                                    <td>
-                                        <img src="{{ $item->image }}" width="50" height="50">
-                                    </td>
-                                    <td>{{ ($item->is_active==1) ? 'Có' : 'Không' }}</td>
-                                    <td><?php if($item->approval_id == null) { echo "Chưa được duyệt"; } else { echo "Đã được duyệt"; } ?></td>
-                                    <td class="text-center">
-                                        <a href="{{route('owner.room.show', ['id'=> $item->id ])}}" class="btn btn-default">Xem</a>
+                                    <td>{{ substr($item->content,0, 10) . '...' }}</td>
+                                    <td id="be_seen-{{ $item->id }}">{{ ($item->be_seen == 1) ? 'Đã xem' : 'Chưa xem'  }}</td>
+                                    <td>{{ $item->created_at }}</td>
+                                    <td class="text-center" id="action-{{ $item->id }}">
+                                        <a href="{{route('owner.showNoti', ['id'=> $item->id ])}}" class="btn btn-default">Xem chi tiết</a>
                                         <!-- Thêm sự kiện onlick cho nút xóa -->
-                                        <a href="javascript:void(0)" class="btn btn-danger" onclick="destroyRoom({{ $item->id }})" >Xóa</a>
+                                        @if($item->be_seen == 0)
+                                            <a href="javascript:void(0)" class="btn btn-danger" id="markAsRead-btn-{{ $item->id }}" onclick="markAsRead({{ $item->id }}, 'index')" >Đánh dấu là đã xem</a>
+                                        @else
+                                            <a href="javascript:void(0)" class="btn btn-primary" id="markAsUnRead-btn-{{ $item->id }}" onclick="markAsUnRead({{ $item->id }}, 'index')" >Đánh dấu là chưa xem</a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

@@ -35,6 +35,9 @@ Route::get('/admin/logout', 'AdminController@logout')->name('admin.logout');
 
 Route::post('/admin/postLogin', 'AdminController@postLogin')->name('admin.postLogin');
 
+// search fulltext route
+Route::get('/room/search/{key_title}','SearchController@searchTitle')->name('searchTitle');
+
 //Route::get('/sendNoti/{title}/{msg}/{receiver_id}', 'AdminController@sendNoti');
 
 Route::get('/getListDistrict/{city_id}', 'AdminController@getListDistrict');
@@ -43,13 +46,16 @@ Route::get('/checkExistsEmail/{new_email}', 'UserController@checkExistEmail');
 
 Route::get('/checkExistsCmnd/{new_cmnd}', 'UserController@checkExistCmnd');
 
-
 Route::get('/checkOldPassword/{password}', 'UserController@checkOldPassword');
 
 Route::post('/user/changePassword', 'UserController@changePassword')->name('postchangePassword');
 
+
 Route::group(['prefix' => 'admin','as' => 'admin.', 'middleware' => ['checkLogin']], function() {
     Route::get('/', 'AdminController@index')->name('dashboard');
+    Route::get('/errorPage', 'AdminController@errorPage')->name('error');
+
+    Route::get('/room/search/{role}','RoomController@searchTitle')->name('searchTitleAdmin');
     Route::resource('room', 'RoomController');
     Route::get('/user/getListOwnerRequested', 'UserController@getListRequestedOwner')->name('user.getListOwnerRequested');
     Route::resource('user', 'UserController');
@@ -72,6 +78,14 @@ Route::group(['prefix' => 'admin','as' => 'admin.', 'middleware' => ['checkLogin
     Route::get('/getAllRequestEditRoom', 'AdminController@getAllRequestEditRoom')->name('getAllRequestEditRoom');
     Route::get('/approveRequestEditRoom/{request_id}', 'AdminController@approveEditRoom');
     Route::get('/declineRequestEditRoom/{request_id}', 'AdminController@declineEditRoom');
+    Route::get('/checkExpiredRoom', 'RoomController@checkExpired');
+
+    Route::get('/mostViewedRoom', 'AdminController@getMostViewedRoom')->name('getMostViewedRoom');
+    Route::get('/mostViewedRoombytime', 'AdminController@getMostViewedRoom_bytime')->name('getMostViewedRoombytime');
+
+
+    Route::get('/mostLikedRoom', 'AdminController@getMostLikedRoom')->name('getMostLikedRoom');
+
 
 });
 
@@ -102,5 +116,9 @@ Route::group(['prefix' => 'owner','as' => 'owner.', 'middleware' => ['checkLogin
     Route::match( ['put','patch'],'/updateProfile', 'OwnerController@updateProfile')->name('updateProfile');
     Route::get('/markAsRead/{noti_id}', 'OwnerController@markAsRead')->name('markNotiAsRead');
     Route::get('/markAsUnRead/{noti_id}', 'OwnerController@markAsUnRead')->name('markNotiAsUnRead');
+//    Route::get('/markAsRented/{room_id}', 'OwnerController@markAsRented')->name('markRoomAsRented');
+    Route::get('/room/search/{role}','RoomController@searchTitle')->name('searchTitleOwner');
+
+
 
 });

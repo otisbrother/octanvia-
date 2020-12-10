@@ -60,6 +60,9 @@
 <script src="/backend/dist/js/demo.js"></script>
 {{-- Link file js xoa' du lieu backend --}}
 <script src="/backend/js/main.js"></script>
+{{-- link js frontend--}}
+<script src="/frontend/js/main.js"></script>
+
 @yield('my_javascript')
 
 

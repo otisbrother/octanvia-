@@ -60,6 +60,7 @@ $user = \Illuminate\Support\Facades\Auth::user();
                 </a>
             </li>
         </ul>
+
     </section>
     <!-- /.sidebar -->
 </aside>

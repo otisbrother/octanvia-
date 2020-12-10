@@ -1,6 +1,13 @@
 <?php
-$user = \Illuminate\Support\Facades\Auth::user();
-$all_noti = \App\Notify::where(['receive_id' => $user->id])->get();
+    $user = \Illuminate\Support\Facades\Auth::user();
+    $all_noti = \App\Notify::where(['receive_id' => $user->id])->get();
+    $unread_noti_q = 0;
+    foreach ($all_noti as $noti)
+        {
+            if($noti->be_seen == 0) {
+                $unread_noti_q++ ;
+            }
+        }
 ?>
 
 <header class="main-header">
@@ -26,10 +33,10 @@ $all_noti = \App\Notify::where(['receive_id' => $user->id])->get();
                 <li class="dropdown notifications-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-bell-o"></i>
-                        <span class="label label-warning">{{ count($all_noti) }}</span>
+                        <span class="label label-warning">{{ $unread_noti_q }}</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header">You have {{ count($all_noti) }} notifications</li>
+                        <li class="header">You have {{ $unread_noti_q }} (unread) / {{ count($all_noti) }}  notifications</li>
                         <li>
                             <!-- inner menu: contains the actual data -->
                             <ul class="menu">

@@ -3,7 +3,6 @@
     <section class="content-header">
         <h1>
             Dashboard
-            <small>Control panel</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -25,14 +24,13 @@
                 <!-- small box -->
                 <div class="small-box bg-aqua">
                     <div class="inner">
-                        <h3>Belier Nguyen</h3>
-
-                        <p>Đơn Hàng</p>
+                        <h3>Rent House</h3>
+                        <p>Phòng trọ được xem nhiều nhất</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="/admin/order" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('admin.getMostViewedRoom') }}" class="small-box-footer">Xem thêm <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -40,14 +38,14 @@
                 <!-- small box -->
                 <div class="small-box bg-green">
                     <div class="inner">
-                        <h3>Belier Nguyen</h3>
+                        <h3>Rent House</h3>
 
-                        <p>Sản phẩm</p>
+                        <p>Phòng trọ được yêu thích nhất</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
                     </div>
-                    <a href="/admin/product" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('admin.getMostLikedRoom') }}" class="small-box-footer">Xem thêm <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -55,14 +53,14 @@
                 <!-- small box -->
                 <div class="small-box bg-yellow">
                     <div class="inner">
-                        <h3>Belier Nguyen</h3>
+                        <h3>Rent House</h3>
 
                         <p>Bài viết</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
                     </div>
-                    <a href="/admin/article" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="/admin/article" class="small-box-footer">Xem thêm <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -70,14 +68,14 @@
                 <!-- small box -->
                 <div class="small-box bg-red">
                     <div class="inner">
-                        <h3>Belier Nguyen</h3>
+                        <h3>Rent House</h3>
 
                         <p>Người dùng</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
                     </div>
-                    <a href="/admin/user" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="/admin/user" class="small-box-footer">Xem thêm <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->

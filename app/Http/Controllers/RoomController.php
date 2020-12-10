@@ -23,6 +23,7 @@ class RoomController extends Controller
      */
     public function index()
     {
+        $this->checkExpired();
         $data = Room::latest()->paginate(20);
         return view('backend.room.index', [
             'data' => $data
@@ -160,11 +161,18 @@ class RoomController extends Controller
         $roomTypeName = Room_type::where('id', $data->roomType_id)->first();
         $facilities = $data->facilities()->get();
         $room_detailImages =  Room_image::where(['room_id' => $data->id ])->orderBy('position', 'ASC')->get();
+        // luot yeu thich cua phong tro - start
+        $room_likes = 0;
+        $likes_query = "SELECT count(*) AS 'likes' FROM user_like WHERE room_id = '$id'";
+        $room_likes = DB::select($likes_query)[0]->likes;
+        // end
         return view('backend.room.show', [
+            'title' => 'Chi Tiết Phòng Trọ',
             'data' => $data,
             'roomTypeName' => $roomTypeName->name,
             'room_detailImages' => $room_detailImages,
-            'facilities' => $facilities
+            'facilities' => $facilities,
+            'room_likes' => $room_likes,
         ]);
     }
 
@@ -335,4 +343,36 @@ class RoomController extends Controller
             'status' => true
         ], 200);
     }
+
+    public function checkExpired()
+    {
+        $all_room = Room::all();
+        $today = date('Y-m-d');
+        foreach($all_room as $room)
+        {
+            if($room->expired_date < $today) {
+                $room->is_active = 0;
+                $room->save();
+            }
+        }
+    }
+
+    public function searchTitle($role)
+    {
+        $key_title = '';
+        $key_title = $_GET['key_title'];
+        $search_query = "SELECT * FROM room WHERE MATCH(title)AGAINST('$key_title' WITH QUERY EXPANSION)";
+        $data = DB::select($search_query);
+        if($role == 'admin') {
+            return view('backend.room.index', [
+                'data' => $data
+            ]);
+        } else if ($role == 'owner') {
+            return view('owner.room.index', [
+                'data' => $data
+            ]);
+        }
+    }
+
+
 }

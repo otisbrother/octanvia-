@@ -128,7 +128,7 @@
                         <div class="box-footer">
                             <p id="msg"></p>
 
-                            <button type="submit" class="btn btn-primary" >Tạo</button>
+                            <button type="submit" id="submit_btn" class="btn btn-primary" >Tạo</button>
                         </div>
                     </div>
                 </div>
@@ -153,7 +153,7 @@
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="exampleInputFile">Ảnh Phòng Trọ</label>
-                                <input type="file" class="" id="image" name="detailImage[]" onchange="validateDetailImages()" multiple>
+                                <input type="file" class="" id="detail_images" name="detailImage[]" onchange="validateDetailImages()" multiple>
                             </div>
                         </div>
                         <!-- /.box-body -->

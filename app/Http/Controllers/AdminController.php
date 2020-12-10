@@ -7,14 +7,18 @@ use App\ExtendPost;
 use App\Notify;
 use App\RequestEditRoom;
 use App\Room;
+use App\Room_image;
+use App\Room_type;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
     public function index()
     {
+        app()->call('App\Http\Controllers\RoomController@checkExpired');
         return view('backend.home');
     }
 
@@ -291,6 +295,91 @@ class AdminController extends Controller
             'status' => true
         ], 200);
     }
+
+    public function getMostViewedRoom()
+    {
+        $data = Room::orderBy('views', 'DESC')->first();
+        $roomTypeName = Room_type::where('id', $data->roomType_id)->first();
+        $facilities = $data->facilities()->get();
+        $room_detailImages =  Room_image::where(['room_id' => $data->id ])->orderBy('position', 'ASC')->get();
+        // luot yeu thich cua phong tro - start
+        $room_likes = 0;
+        $likes_query = "SELECT count(*) AS 'likes' FROM user_like WHERE room_id = '$data->id'";
+        $room_likes = DB::select($likes_query)[0]->likes;
+        // end
+        return view('backend.room.show', [
+            'title' => 'Phòng trọ được xem nhiều nhất',
+            'data' => $data,
+            'roomTypeName' => $roomTypeName->name,
+            'room_detailImages' => $room_detailImages,
+            'facilities' => $facilities,
+            'room_likes' => $room_likes,
+            'type_page' => 'filter_view'
+        ]);
+    }
+
+    public function getMostViewedRoom_bytime()
+    {
+        $month = $_GET['filter_m'];
+        $year  = $_GET['filter_y'];
+        $query = "SELECT room_id, date_views, count(*) AS `luot_views` FROM user_views GROUP BY 'room_id' HAVING MONTH(date_views) = $month AND YEAR(date_views) = $year ORDER BY count(*) DESC LIMIT 1";
+        $arr_result = DB::select($query);
+        if(!empty($arr_result)) {
+            $result = $arr_result[0];
+            $data = Room::findOrFail($result->room_id);
+            $roomTypeName = Room_type::where('id', $data->roomType_id)->first();
+            $facilities = $data->facilities()->get();
+            $room_detailImages =  Room_image::where(['room_id' => $data->id ])->orderBy('position', 'ASC')->get();
+            // luot yeu thich cua phong tro - start
+            $room_likes = 0;
+            $likes_query = "SELECT count(*) AS 'likes' FROM user_like WHERE room_id = '$data->id'";
+            $room_likes = DB::select($likes_query)[0]->likes;
+            // end
+            return view('backend.room.show', [
+                'title' => "Phòng trọ được xem nhiều nhất tháng $month năm $year",
+                'data' => $data,
+                'roomTypeName' => $roomTypeName->name,
+                'room_detailImages' => $room_detailImages,
+                'facilities' => $facilities,
+                'room_likes' => $room_likes,
+                'type_page' => 'filter_view'
+            ]);
+        } else {
+            return view('backend.errorPage', [
+                'err_msg' => 'Dữ liệu theo thời gian bạn tìm kiếm không tồn tại. Xin lỗi vì sự bất tiện này.',
+            ]);
+        }
+
+    }
+
+
+
+    public function getMostLikedRoom()
+    {
+        $query = "SELECT room_id, count(*) AS `likes` FROM user_like GROUP BY room_id ORDER BY count(*) DESC LIMIT 1";
+        $result = DB::select($query)[0];
+        $data = Room::findOrFail($result->room_id);
+        $roomTypeName = Room_type::where('id', $data->roomType_id)->first();
+        $facilities = $data->facilities()->get();
+        $room_detailImages =  Room_image::where(['room_id' => $data->id ])->orderBy('position', 'ASC')->get();
+        // luot yeu thich cua phong tro
+        $room_likes = $result->likes;
+        return view('backend.room.show', [
+            'title' => 'Phòng trọ được nhiều lượt yêu thích nhất',
+            'data' => $data,
+            'roomTypeName' => $roomTypeName->name,
+            'room_detailImages' => $room_detailImages,
+            'facilities' => $facilities,
+            'room_likes' => $room_likes,
+            'type_page' => 'filter_like'
+        ]);
+    }
+
+    public function errorPage()
+    {
+        return view('backend.errorPage');
+    }
+
 
     public function test()
     {

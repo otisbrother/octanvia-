@@ -21,32 +21,35 @@
                 <div class="box">
                     <div class="box-header">
                         <div class="box-tools">
-                            <div class="input-group input-group-sm hidden-xs" style="width: 150px;">
-                                <input type="text" name="table_search" class="form-control pull-right"
-                                       placeholder="Search">
-
-                                <div class="input-group-btn">
-                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            <form action="{{ route('owner.searchTitleOwner', ['role' => 'owner']) }}" method="get" id="form-searchRoom">
+                                <div class="input-group input-group-sm hidden-xs" style="width: 150px;">
+                                    <input type="text" name="key_title" class="form-control pull-right"
+                                           placeholder="Search">
+                                    <div class="input-group-btn">
+                                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                     <div class="box-body table-responsive no-padding">
                         <table class="table table-hover">
                             <tbody>
                             <tr>
-                                <th>ID Bài Viết</th>
+                                <th>ID</th>
                                 <th>Tên Tiêu Đề</th>
                                 <th>Loại Phòng</th>
                                 <th>Địa Chỉ</th>
                                 <th>Giá Phòng</th>
                                 <th>Hình ảnh</th>
                                 <th>Hiển thị</th>
+                                <th>Lượt xem</th>
                                 <th>Trạng thái</th>
+
                                 <th class="text-center">Hành động</th>
                             </tr>
                             </tbody>
-                            @foreach($list as $key => $item)
+                            @foreach($data as $key => $item)
                                 <tr class="item-{{ $item->id }}"> <!-- Thêm Class Cho Dòng -->
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->title }}</td>
@@ -57,6 +60,7 @@
                                         <img src="{{ $item->image }}" width="50" height="50">
                                     </td>
                                     <td>{{ ($item->is_active==1) ? 'Có' : 'Không' }}</td>
+                                    <td>{{ $item->views }}</td>
                                     <td><?php if($item->approval_id == null) { echo "Chưa được duyệt"; } else { echo "Đã được duyệt"; } ?></td>
                                     <td class="text-center">
                                         <a href="{{route('owner.room.show', ['id'=> $item->id ])}}" class="btn btn-default">Xem</a>

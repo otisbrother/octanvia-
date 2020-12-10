@@ -35,7 +35,7 @@
                         <table class="table table-hover">
                             <tbody>
                             <tr>
-                                <th>Id Bài Viết</th>
+                                <th>ID</th>
                                 <th>Tên Tiêu Đề</th>
                                 <th>Loại Phòng</th>
                                 <th>Địa Chỉ</th>

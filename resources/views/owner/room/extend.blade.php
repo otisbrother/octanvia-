@@ -53,6 +53,9 @@
         </div>
     </section>
     <script>
+        function formatNumber(num) {
+            return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+        }
         function totalMoney() {
             var unit = document.getElementById('unit_date').value;
             var quantity = document.getElementById('quantity').value;
@@ -65,7 +68,7 @@
                 totalMoney = quantity*50000*52;
             }
 
-            document.getElementById('total_price').value = totalMoney;
+            document.getElementById('total_price').value = formatNumber(totalMoney);
         }
     </script>
 @endsection

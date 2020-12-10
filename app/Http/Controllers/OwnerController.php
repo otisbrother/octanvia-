@@ -25,16 +25,17 @@ class OwnerController extends Controller
 
     public function getAllRoom()
     {
+        app()->call('App\Http\Controllers\RoomController@checkExpired');
         $user = Auth::user();
-        $list = Room::where(['user_id' => $user->id])->orderBy('created_at', 'ASC')->get();
+        $data = Room::where(['user_id' => $user->id])->orderBy('created_at', 'ASC')->get();
         $getDate = date('Y-m-d');
-        foreach ($list as $value) {
+        foreach ($data as $value) {
             if ($getDate > $value->expired_date) {
                 $value->is_active = 0;
             }
         }
         return view('owner.room.index', [
-            'list' => $list
+            'data' => $data
         ]);
         // or return json ?
     }
@@ -58,12 +59,19 @@ class OwnerController extends Controller
         $expiredDate = $data->expired_date;
         if ($getDate > $expiredDate) {
             $data->is_active = 0;
+            $data->save();
         }
-
+        // luot yeu thich cua phong tro - start
+        $room_likes = 0;
+        $likes_query = "SELECT count(*) AS 'likes' FROM user_like WHERE room_id = '$id'";
+        $room_likes = DB::select($likes_query)[0]->likes;
+        // end
         $show_Request = 1;
         $request_edit = RequestEditRoom::where(['room_id' => $id])->orderBy('created_at', 'DESC')->limit(1)->first();
-        if($request_edit->approved_by == null) {
-            $show_Request = 0;
+        if($request_edit != null) {
+            if($request_edit->approved_by == null) {
+                $show_Request = 0;
+            }
         }
 
         $canEdit = $data->canbe_edit; // ??
@@ -73,7 +81,8 @@ class OwnerController extends Controller
             'room_detailImages' => $room_detailImages,
             'facilities' => $facilities,
             'getDate' => $getDate,
-            'show_Request' => $show_Request
+            'show_Request' => $show_Request,
+            'room_likes' => $room_likes
 
         ]);
     }
@@ -474,7 +483,8 @@ class OwnerController extends Controller
 
     public function showAllNoti()
     {
-        $data = Notify::all();
+        $user = Auth::user();
+        $data = Notify::where(['receive_id' => $user->id])->get();
         return view('owner.viewAllNoti', [
             'data' => $data,
         ]);
@@ -581,6 +591,17 @@ class OwnerController extends Controller
             'status' => true
         ], 200);
     }
+//
+//    public function markAsRented($room_id)
+//    {
+//        $room = Room::findOrFail($room_id);
+//        $room->rented = 1;
+//        $room->save();
+//
+//        return response()->json([
+//            'status' => true
+//        ], 200);
+//    }
 
 
 }

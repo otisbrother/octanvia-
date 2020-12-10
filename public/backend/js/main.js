@@ -404,3 +404,4 @@ function markAsUnRead(noti_id, pos) {
     });
 }
 
+

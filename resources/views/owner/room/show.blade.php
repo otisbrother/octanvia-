@@ -19,6 +19,7 @@
     <h1>
         Chi Tiết Phòng Trọ <a href="{{route('owner.room.index')}}" class="btn btn-success pull-right"> Danh sách phòng trọ </a>
     </h1>
+
 </section>
 <section class="content">
     <div class="row">
@@ -110,36 +111,25 @@
                             </tbody>
                         </table>
                     </div>
-                        @if($data->approval_id == null || $data->approval_date == null)
-                             <p style="padding: 15px; color: red;">Bài đăng chưa được duyệt. Vui lòng đợi admin phê duyệt</p>
-                        @else
-                            @if ($getDate > $data->expired_date)
-                                <div class="box-footer">
-                                    <a href="{{ route('owner.room.extendDate', ['id' => $data->id]) }}" class="btn btn-primary">Gia hạn bài đăng</a>
-                                    <span style="color: red"> Gia hạn để có thể tiếp tục hiển thị bài đăng</span>
-                                </div>
-                            @else
-                                @if ($data->canbe_edit == 1)
-                                    <div class="box-footer">
-                                        <a href="{{route('owner.room.edit', ['id'=> $data->id ])}}" class="btn btn-info">Sửa</a>
-                                    </div>
-                                @else
-                                    @if($show_Request == 1)
-                                        <div class="box-footer">
 
-                                            <a href="{{route('owner.room.requestEdit', [ 'room_id' => $data->id ])}}" class="btn btn-info" >Yêu Cầu Quyền Sửa</a>
-                                        </div>
-                                    @else
-                                         <p style="padding: 15px; color: red;">Yêu cầu chỉnh sửa đã được gửi. Vui lòng đợi admin phê duyệt</p>
-                                    @endif
-                                @endif
-                            @endif
-                        @endif
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="box box-primary">
                     <div class="box-body">
+
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr>
+                                <td><b>Lượt xem</b></td>
+                                <td>{{ $data->views }}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Lượt yêu thích</b></td>
+                                <td>{{ $room_likes }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
                         <h3>Ảnh chi tiết phòng trọ</h3>
                         @foreach($room_detailImages as $item)
                             <div class="listImg">
@@ -151,6 +141,34 @@
 
                     </div>
                 </div>
+                @if($data->approval_id == null || $data->approval_date == null)
+                    <p style="padding: 15px; color: red;">Bài đăng chưa được duyệt. Vui lòng đợi admin phê duyệt</p>
+                @else
+                    @if ($getDate > $data->expired_date)
+                        <div class="box-footer">
+                            <a href="{{ route('owner.room.extendDate', ['id' => $data->id]) }}" class="btn btn-primary">Gia hạn bài đăng</a>
+                            <span style="color: red"> Gia hạn để có thể tiếp tục hiển thị bài đăng</span>
+                        </div>
+                    @else
+                        @if ($data->canbe_edit == 1)
+                            <div class="box-footer">
+                                <a href="{{route('owner.room.edit', ['id'=> $data->id ])}}" class="btn btn-info">Sửa</a>
+                            </div>
+                        @else
+                            @if($show_Request == 1)
+                                <div class="box-footer">
+
+                                    <a href="{{route('owner.room.requestEdit', [ 'room_id' => $data->id ])}}" class="btn btn-info" >Yêu Cầu Quyền Sửa</a>
+                                </div>
+                            @else
+                                <p style="padding: 15px; color: red;">Yêu cầu chỉnh sửa đã được gửi. Vui lòng đợi admin phê duyệt</p>
+                            @endif
+                        @endif
+{{--                        <div class="box-footer">--}}
+{{--                            <a href="#" class="btn btn-info">Đánh dấu là đã cho thuê / hết phòng</a>--}}
+{{--                        </div>--}}
+                    @endif
+                @endif
             </div>
     </div>
 </section>

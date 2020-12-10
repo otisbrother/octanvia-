@@ -21,21 +21,22 @@
             <div class="box">
                 <div class="box-header">
                     <div class="box-tools">
-                        <div class="input-group input-group-sm hidden-xs" style="width: 150px;">
-                            <input type="text" name="table_search" class="form-control pull-right"
-                                   placeholder="Search">
-
-                            <div class="input-group-btn">
-                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        <form action="{{ route('admin.searchTitleAdmin', ['role' => 'admin']) }}" method="get" id="form-searchRoom">
+                            <div class="input-group input-group-sm hidden-xs" style="width: 150px;">
+                                <input type="text" name="key_title" class="form-control pull-right"
+                                       placeholder="Search">
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <div class="box-body table-responsive no-padding">
                     <table class="table table-hover">
                         <tbody>
                         <tr>
-                            <th>Id Bài Viết</th>
+                            <th>ID</th>
                             <th>Tên Tiêu Đề</th>
                             <th>Loại Phòng</th>
                             <th>Địa Chỉ</th>

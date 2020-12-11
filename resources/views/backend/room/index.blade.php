@@ -1,6 +1,10 @@
 @extends('backend.layouts.main')
 @section('content')
-
+<style>
+    .room-address {
+        width: 260px!important;
+    }
+</style>
 <section class="content-header">
     <h1>
         Danh Sách Phòng Trọ <a href="{{route('admin.room.create')}}" class="btn btn-info pull-right"><i class="fa fa-plus"></i> Thêm Phòng Trọ</a>
@@ -39,7 +43,7 @@
                             <th>ID</th>
                             <th>Tên Tiêu Đề</th>
                             <th>Loại Phòng</th>
-                            <th>Địa Chỉ</th>
+                            <th class="room-address">Địa Chỉ</th>
                             <th>Giá Phòng (VNĐ)</th>
                             <th>Ảnh tiêu đề</th>
                             <th>Ngày Đăng Bài</th>
@@ -67,9 +71,15 @@
                                 </td>
                             </tr>
                         @endforeach
+
                     </table>
                 </div>
+
             </div>
+        </div>
+        <div class="col-xs-12" style="display: flex; justify-content: center;">
+            {{ $data->links() }}
+
         </div>
     </div>
 </section>

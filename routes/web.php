@@ -13,20 +13,50 @@
 
 use App\Room;
 use Illuminate\Support\Facades\Route;
+// ghep frontend - test
+Route::get('/', 'GuestController@index')->name('home');
 
-Route::get('/', function () {
-    return view('frontend/home');
+Route::get('/login', 'GuestController@get_login_register')->name('guest.login-register');
+
+Route::post('/postLogin', 'GuestController@postLogin')->name('guest.postLogin');
+
+Route::get('/blog', 'GuestController@getAllPosts')->name('guest.blog');
+
+Route::get('/blogDetail/{post_id}', 'GuestController@blogDetail')->name('guest.blogDetail');
+
+
+Route::get('/room', 'GuestController@getAllRoom')->name('guest.allroom');
+
+Route::get('/room/{room_id}', 'GuestController@showRoomDetail')->name('guest.showroom');
+
+
+
+
+
+
+Route::get('/userprofile', function () {
+    return view('frontend.user_profile');
 });
-Route::get('/room', function () {
-    return view('frontend/room');
+// Cac route o day phuc vu cho viec select iframe page o trang user
+Route::get('/profile-info', function () {
+   return view('frontend.user.profile_info');
+})->name('profile-info-page');
+Route::get('/noti-page', function () {
+    return view('frontend.user.noti-page');
 });
+Route::get('/liked-rooms', function () {
+    return view('frontend.user.liked_rooms');
+});
+// end iframe trang user
+
+// end ghep frontend - test
 
 // xu ly de lam sao user dang nhap moi dung dc, se lam sau khi test xong viec get giu lieu = ajax
 
-Route::get('/user/getAllRoomViewed', 'UserViewedController@getAllRoomViewed')->name('userviewed.getAllRoomViewed');
-Route::get('/user/storeRoomViewed/{user_id}/{room_id}', 'UserViewedController@storeViewed')->name('userviewed.store');
-Route::get('/user/storeVoted/{user_id}/{room_id}/{count_star}', 'UserVotedController@storeVoted')->name('uservoted.store');
-Route::get('/user/storeLiked/{user_id}/{room_id}', 'UserLikedController@storeLiked')->name('userliked.store');
+//Route::get('/user/getAllRoomViewed', 'UserViewedController@getAllRoomViewed')->name('userviewed.getAllRoomViewed');
+//Route::get('/user/storeRoomViewed/{user_id}/{room_id}', 'UserViewedController@storeViewed')->name('userviewed.store');
+//Route::get('/user/storeVoted/{user_id}/{room_id}/{count_star}', 'UserVotedController@storeVoted')->name('uservoted.store');
+//Route::get('/user/storeLiked/{user_id}/{room_id}', 'UserLikedController@storeLiked')->name('userliked.store');
 
 Route::get('/admin/login', 'AdminController@login')->name('admin.login');
 //Route::get('/login', 'ShopController@login')->name('shop.login');
@@ -54,7 +84,6 @@ Route::post('/user/changePassword', 'UserController@changePassword')->name('post
 Route::group(['prefix' => 'admin','as' => 'admin.', 'middleware' => ['checkLogin']], function() {
     Route::get('/', 'AdminController@index')->name('dashboard');
     Route::get('/errorPage', 'AdminController@errorPage')->name('error');
-
     Route::get('/room/search/{role}','RoomController@searchTitle')->name('searchTitleAdmin');
     Route::resource('room', 'RoomController');
     Route::get('/user/getListOwnerRequested', 'UserController@getListRequestedOwner')->name('user.getListOwnerRequested');
@@ -86,6 +115,7 @@ Route::group(['prefix' => 'admin','as' => 'admin.', 'middleware' => ['checkLogin
 
     Route::get('/mostLikedRoom', 'AdminController@getMostLikedRoom')->name('getMostLikedRoom');
 
+    Route::resource('post', 'PostController');
 
 });
 
@@ -118,7 +148,7 @@ Route::group(['prefix' => 'owner','as' => 'owner.', 'middleware' => ['checkLogin
     Route::get('/markAsUnRead/{noti_id}', 'OwnerController@markAsUnRead')->name('markNotiAsUnRead');
 //    Route::get('/markAsRented/{room_id}', 'OwnerController@markAsRented')->name('markRoomAsRented');
     Route::get('/room/search/{role}','RoomController@searchTitle')->name('searchTitleOwner');
-
+    Route::get('/test/{room_id}', 'OwnerController@test_owner');
 
 
 });

@@ -120,6 +120,7 @@ class RoomController extends Controller
         }
         $room->is_active = $is_active;
         $facilities = $request->input('facilities');
+        $room->is_approved = 1;
         $room->save();
         if ($request->hasFile('detailImage')) {
             // get file

@@ -26,7 +26,10 @@
                                     <label for="exampleInputEmail1">Tên Quận/Huyện</label>
                                     <input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên quận huyện">
                                 </div>
-
+                                <div class="form-group">
+                                    <label for="exampleInputFile">Hình ảnh</label>
+                                    <input type="file" id="image" name="image">
+                                </div>
 
                                 <div class="checkbox">
                                     <label>

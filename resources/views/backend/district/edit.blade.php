@@ -16,7 +16,7 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tỉnh/Thành Phố</label>
                                 <select class="form-control w-50" name="city">
-                                    <option value="0">-- Chọn Tỉnh/Thành Phố  --</option>
+                                    <option value="{{ $chosenCity->id }}">{{ $chosenCity->name }}</option>
                                     @foreach($city as $t_city)
                                         <option value="{{$t_city->id}}">{{$t_city->name}}</option>
                                     @endforeach
@@ -42,6 +42,12 @@
                             <div class="form-group">
                                 <label for="exampleInputFile">Ngày Cập Nhật gần nhất</label>
                                 <input value="{{$district->updated_at}}" type="text" class="form-control" id="updated  _at" name="updated_at" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputFile" style="color: #9c3328">** Thay đổi ảnh quận/huyện</label>
+                                <input type="file" id="new_image" name="new_image">
+                                <br>
+                                <img src="{{ asset($district->image) }}" width="250">
                             </div>
                             <div class="checkbox">
                                 <label>

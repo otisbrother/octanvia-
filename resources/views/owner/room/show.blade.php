@@ -128,6 +128,10 @@
                                 <td><b>Lượt yêu thích</b></td>
                                 <td>{{ $room_likes }}</td>
                             </tr>
+                            <tr>
+                                <td><b>Tình trạng</b></td>
+                                <td>{{ ($data->rented == 1) ? 'Đã được thuê' : 'Chưa được thuê' }}</td>
+                            </tr>
                             </tbody>
                         </table>
                         <h3>Ảnh chi tiết phòng trọ</h3>

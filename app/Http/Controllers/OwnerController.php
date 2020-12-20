@@ -13,6 +13,8 @@ use App\Room;
 use App\Room_image;
 use App\Room_type;
 use App\User;
+use App\User_views;
+use App\User_vote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -602,6 +604,17 @@ class OwnerController extends Controller
 //            'status' => true
 //        ], 200);
 //    }
-
+    public function test_owner($room_id)
+    {
+        // thống kê lượt vote của room
+        $vote_statistics = User_vote::where(['room_id' => $room_id])->get();
+        $vote_avg = 0;
+        foreach($vote_statistics as $vote) {
+            $vote_avg += $vote->star;
+        }
+        $vote_avg = $vote_avg/count($vote_statistics);
+        $vote_avg = round($vote_avg, 2); // lam tron den 2 chu so thap phan
+        dd($vote_avg);
+    }
 
 }

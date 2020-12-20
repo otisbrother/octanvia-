@@ -104,7 +104,7 @@
                             </tr>
                             <tr>
                                 <td><b>Giá Phòng (VNĐ) </b></td>
-                                <td>{{ $data->price }}</td>
+                                <td>{{  number_format($data->price,0,",",".") }}</td>
                             </tr>
                             <tr>
                                 <td><b>Hình ảnh tiêu đề:</b></td>

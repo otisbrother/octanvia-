@@ -1,0 +1,80 @@
+.top-bar .extra-menu {
+    display: flex;
+}
+
+.body {
+    transform: translateY(130px);
+    margin-bottom: 150px;
+}
+
+.body .filter {
+    background-color: white;
+    margin: 0 auto;
+    padding: 5%;
+    border-radius: 15px;
+    align-self: flex-start;
+}
+
+.filter>h2 {
+    margin-bottom: 20px;
+}
+
+.filter form>div {
+    margin-bottom: 15px;
+}
+.filter form input[type="range"]{
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;  
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+.filter form button{
+    width: 90%;
+    background-color: rgb(255, 130, 151);
+    border-radius: 15px;
+    border: none;
+    padding: 10px 5%;
+    font-weight: 500;
+    margin: auto;
+}
+.showBtn{
+    margin-right: 10px;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    transition: 0.2s;
+}
+.op {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.item{
+    display: none;
+}
+#city{
+    margin-top: 5px;
+    border: 1px solid gray;
+}
+@media only screen and (max-width: 1024px){
+    .main-section{
+        width: 95%;
+        margin: auto;
+        margin-bottom: 200px;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .body .filter {
+        padding: 30px 2%;
+        margin-bottom: 30px;
+    }
+    .body .filter form{
+        display: flex;
+        justify-content: space-between;
+    }
+}

@@ -1,0 +1,38 @@
+.rooms{
+    /* height: 90% !important; */
+}
+.rooms .room {
+    min-height: 20%;
+    
+}
+.room-img{
+    height: 100%;
+}
+.room-info{
+    height: 100%;
+    /* overflow-y: scroll; */
+}
+.room-detail .line span,.room-info p{
+    font-size: 14px;
+}
+/* .line-1,.line-2,.line-3,.line-4{
+    display: inline-block;
+}
+.line-2,.line-4{
+    margin-left: 10%;
+} */
+@media only screen and (max-width:768px){
+    .room-detail .line span{
+        font-size: 1rem;
+    }
+    .room{
+        width: 100% !important;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+    }
+}
+@media only screen and (max-width:568px){
+    .room-detail .line span{
+        font-size: 0.8rem;
+    }
+}

@@ -58,8 +58,10 @@
 <script src="/backend/dist/js/adminlte.min.js"></script>
 <script src="/backend/dist/js/pages/dashboard.js"></script>
 <script src="/backend/dist/js/demo.js"></script>
+<script src="/backend/bower_components/ckeditor/ckeditor.js"></script>
 {{-- Link file js xoa' du lieu backend --}}
 <script src="/backend/js/main.js"></script>
+
 @yield('my_javascript')
 
 

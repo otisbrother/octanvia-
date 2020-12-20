@@ -94,6 +94,18 @@
                     <li><a href="{{ route('admin.user.getListOwnerRequested') }}"><i class="fa fa-circle-o"></i>Danh sách Owner chờ duyệt</a></li>
                 </ul>
             </li>
+            <li class="treeview">
+                <a href="javascript:void(0)">
+                    <i class="fa fa-dashboard"></i> <span>QL Bài viết</span>
+                    <span class="pull-right-container">
+                         <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="active"><a href="{{ route('admin.post.index') }}"><i class="fa fa-circle-o"></i>Tất cả bài viết</a></li>
+                    <li><a href="{{ route('admin.post.create') }}"><i class="fa fa-circle-o"></i>Thêm bài viết</a></li>
+                </ul>
+            </li>
             <li class="#">
                 <a href="{{route('admin.city.index')}}">
                     <i class="fa fa-dashboard"></i> <span>QL Tỉnh/Thành Phố</span>

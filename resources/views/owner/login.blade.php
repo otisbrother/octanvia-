@@ -35,18 +35,18 @@
         <a href=""><b>Rent House | Owner</b></a>
     </div>
     <!-- /.login-logo -->
-    <div class="login-box-body">
+    <div class="login-box-body rounded-css">
         <form role="form" action="{{ route('owner.postLogin') }}" method="post">
             @csrf
             <div class="form-group has-feedback">
-                <input name="email" type="email" class="form-control" placeholder="Email">
+                <input name="email" type="email" class="form-control rounded-css" placeholder="Email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 @if ($errors->has('email'))
                     <span class="invalid-feedback" role="alert" style="color:red;">{{ $errors->first('email') }}</span>
                 @endif
             </div>
             <div class="form-group has-feedback">
-                <input  name="password" type="password" class="form-control" placeholder="Password">
+                <input  name="password" type="password" class="form-control rounded-css" placeholder="Password">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 @if ($errors->has('password'))
                     <span class="invalid-feedback" role="alert" style="color:red;">{{ $errors->first('password') }}</span>
@@ -66,7 +66,7 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Đăng Nhập</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat rounded-css">Đăng Nhập</button>
                 </div>
                 <!-- /.col -->
             </div>
@@ -83,6 +83,12 @@
     </div>
     <!-- /.login-box-body -->
 </div>
+<style>
+{{--    NMD style css --}}
+    .rounded-css{
+        border-radius: 5px!important;
+    }
+</style>
 <!-- /.login-box -->
 
 <!-- jQuery 3 -->

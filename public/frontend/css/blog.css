@@ -1,0 +1,69 @@
+.header .top-bar .extra-menu{
+    display: flex;
+}
+body{
+    background-color: white;
+}
+.top-img{
+    height: 60vh;
+    min-height: 400px;
+}
+.top-img img{
+    height: 100%;
+    width: 100%;
+    object-position: 50%;
+    object-fit: cover;
+}
+.body{
+    margin-top: 20px;
+    min-height: 150px;
+}
+.top-ct > h2,h6{
+    /* text-align: center; */
+}
+.main-ct .img-ct{
+    width: 100%;
+    text-align: center;
+}
+.intro{
+    font-size: 0.8rem;
+    font-style: italic;
+    color: gray;
+}
+.img-ct{
+    width: 100%;
+    margin-bottom: 20px;
+}
+.img-ct img{
+    width: 90%;
+    height: auto;
+    object-fit: contain;
+}
+.img-ct small{
+    font-size: 12px;
+    font-style: italic;
+}
+
+.bottom-ct{
+    padding-top: 5px;
+    font-style: italic;
+    font-size: 12px;
+    text-align: end;
+}
+.other-blogs{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+.other-blogs a{
+    display: block;
+    width: 100%;
+    font-size: 14px;
+    color: gray;
+    padding-left: 5px;
+}
+.other-blogs h6{
+    padding-left: 5px;
+    border-left: 2px solid blue;
+}

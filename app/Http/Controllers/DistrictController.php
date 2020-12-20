@@ -46,12 +46,25 @@ class DistrictController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:255',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:10000'
         ]);
         $user = Auth::user();
         $district = new District(); // khởi tạo model
         $district->name = $request->input('name');
         $district->city_id = $request->input('city');
         $district->create_by = $user->id;
+        if ($request->hasFile('image')) {
+            // get file
+            $file = $request->file('image');
+            // get ten
+            $filename = time().'_'.$file->getClientOriginalName();
+            // duong dan upload
+            $path_upload = 'uploads/district/';
+            // upload file
+            $request->file('image')->move($path_upload,$filename);
+
+            $district->image = $path_upload.$filename;
+        }
         $is_active = 0;
         if ($request->has('is_active')){//kiem tra is_active co ton tai khong?
             $is_active = $request->input('is_active');
@@ -81,12 +94,13 @@ class DistrictController extends Controller
      */
     public function edit($id)
     {
-        $city = City::all();
         $district = District::findorFail($id);
-        $choseCity = City::findorFail($district->city_id);
+        $city = City::where('id', '!=', $district->city_id)->get();
+        $chosenCity = City::findorFail($district->city_id);
         return view('backend.district.edit', [
             'district' => $district,
-            'city'=> $city
+            'city'=> $city,
+            'chosenCity' => $chosenCity,
         ]);
     }
 
@@ -107,6 +121,20 @@ class DistrictController extends Controller
         $district->city_id = $request->input('city');
         $district->name = $request->input('name');
         $district->update_by = $user->id;
+        if ($request->hasFile('new_image')) {
+            // xóa file cũ
+            @unlink(public_path($district->image)); // hàm unlink của PHP không phải laravel , chúng ta thêm @ đằng trước tránh bị lỗi
+            // get file
+            $file = $request->file('new_image');
+            // get ten
+            $filename = time().'_'.$file->getClientOriginalName();
+            // duong dan upload
+            $path_upload = 'uploads/image/';
+            // upload file
+            $request->file('new_image')->move($path_upload,$filename);
+
+            $district->image = $path_upload.$filename;
+        }
         $is_active = 0;
         if ($request->has('is_active')){//kiem tra is_active co ton tai khong?
             $is_active = $request->input('is_active');

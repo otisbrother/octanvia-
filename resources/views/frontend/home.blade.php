@@ -1,316 +1,151 @@
 @extends('frontend.layouts.main')
 @section('content')
 
-    <section class="feature container  py-5">
-        <div class="box-title mb-4">
-            <h2> Sản phẩm thịnh hành  </h2>
-            <div class="d-flex justify-content-between">
-                <p class="m-0"> Chỗ nghỉ được quan tâm nhiều nhất? </p>
-                <p class="m-0"> <a href="#" class="viewall"> View All <span> <i class="fas fa-chevron-right"></i> </span></a></p>
-            </div>
-        </div>
-        <div class="product-slick">
-            <div class="product-slick-item">
-                <a href="#">
-                    <div class="product">
-                        <div class="tab d-flex" >
-                            <span class="mr-2 city"> Hà nội </span>
-                            <span class="mr-2 bg-red"> Top trending </span>
-                        </div>
-                        <div class="img">
-                            <img src="https://images.pexels.com/photos/2343468/pexels-photo-2343468.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
-                        </div>
-                        <div class="content">
-                            <p class="price mb-2"> <strong> 400,000VNĐ </strong>/<span>đêm</span></p>
-                            <p class="name mb-2"> Khách Sạn 5 Sao </p>
-                            <p class="desc m-0"> Phòng ngủ: 2, có nhà bếp </p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="product-slick-item">
-                <a href="#">
-                    <div class="product">
-                        <div class="tab d-flex" >
-                            <span class="mr-2 city"> Hà nội </span>
-                        </div>
-                        <div class="img">
-                            <img src="https://images.pexels.com/photos/462235/pexels-photo-462235.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
-                        </div>
-                        <div class="content">
-                            <p class="price mb-2"> <strong> 200,000VNĐ </strong>/<span>đêm</span></p>
-                            <p class="name mb-2"> Home stay  </p>
-                            <p class="desc m-0"> Phòng ngủ: 3, Phòng khách: 1 </p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="product-slick-item">
-                <a href="#">
-                    <div class="product">
-                        <div class="tab d-flex" >
-                            <span class="mr-3 city"> Đà nẵng </span>
-
-                        </div>
-                        <div class="img">
-                            <img src="https://images.pexels.com/photos/1125136/pexels-photo-1125136.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
-                        </div>
-                        <div class="content">
-                            <p class="price mb-2"> <strong> 200,000VNĐ </strong>/<span>đêm</span></p>
-                            <p class="name mb-2"> Home stay  </p>
-                            <p class="desc m-0"> Phòng ngủ: 2 </p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="product-slick-item">
-                <a href="#">
-                    <div class="product">
-                        <div class="tab d-flex" >
-                            <span class="mr-2 city"> Tp. Hồ chí minh </span>
-                            <span class="mr-2 bg-red"> Top trending </span>
-                        </div>
-                        <div class="img">
-                            <img src="https://images.pexels.com/photos/994605/pexels-photo-994605.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
-                        </div>
-                        <div class="content">
-                            <p class="price mb-2"> <strong> 100,000VNĐ </strong>/<span>đêm</span></p>
-                            <p class="name mb-2"> Home stay </p>
-                            <p class="desc m-0"> Có chỗ cắm trại </p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="product-slick-item">
-                <a href="#">
-                    <div class="product">
-                        <div class="tab d-flex" >
-                            <span class="mr-2 city"> Hải phòng </span>
-                        </div>
-                        <div class="img">
-                            <img src="https://images.pexels.com/photos/2343468/pexels-photo-2343468.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
-                        </div>
-                        <div class="content">
-                            <p class="price mb-2"> <strong> 400,000VNĐ </strong>/<span>đêm</span></p>
-                            <p class="name mb-2"> Khách Sạn 5 Sao </p>
-                            <p class="desc m-0"> Phòng ngủ: 2, có nhà bếp </p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="product-slick-item">
-                <a href="#">
-                    <div class="product">
-                        <div class="tab d-flex" >
-                            <span class="mr-2 city"> Đà nẵng </span>
-
-                        </div>
-                        <div class="img">
-                            <img src="https://images.pexels.com/photos/994605/pexels-photo-994605.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
-                        </div>
-                        <div class="content">
-                            <p class="price mb-2"> <strong> 400,000VNĐ </strong>/<span>đêm</span></p>
-                            <p class="name mb-2"> Khách Sạn 5 Sao </p>
-                            <p class="desc m-0"> Phòng ngủ: 2, có nhà bếp </p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="product-slick-item">
-                <a href="#">
-                    <div class="product">
-                        <div class="tab d-flex" >
-                            <span class="mr-2 city"> Hải phòng </span>
-                        </div>
-                        <div class="img">
-                            <img src="https://images.pexels.com/photos/2343468/pexels-photo-2343468.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
-                        </div>
-                        <div class="content">
-                            <p class="price mb-2"> <strong> 400,000VNĐ </strong>/<span>đêm</span></p>
-                            <p class="name mb-2"> Khách Sạn 5 Sao </p>
-                            <p class="desc m-0"> Phòng ngủ: 2, có nhà bếp </p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-    <section class="category">
-        <div class="container">
-            <div class="box-title mb-5">
-                <h2 class="text-center"> Bạn đang tìm kiếm những gì?   </h2>
-                <div class="d-flex justify-content-center">
-                    <p class="m-0"> Chúng tôi cung cấp đủ dịch vụ cho một kì nghỉ tốt nhất </p>
-
+    <!-- phần giới thiệu trang -->
+    <div class="main-bar">
+        <div class="info">
+            <div class="logo">
+                <img src="https://www.ohanaliving.vn/8541c2b17a0729942ed2a6f13b7b13e4.svg" alt="logo">
+                <div class="option">
+                    <a href="#" class="staying">Trang chủ</a>
+                    <a href="{{ route('guest.blog') }}">Blog</a>
+                    <a href="#">Đăng phòng</a>
                 </div>
             </div>
-            <div class="cate-box">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="box-item">
-                            <div class="icon  d-flex justify-content-center align-items-center">
-                                <i class="fas fa-home"></i>
-                            </div>
-                            <p class="name text-center"> Home stay  </p>
-                            <p class="desc text-center"> Những khách sạn nghỉ dưỡng tuyệt vời</p>
-                            <p class="text-center m-0"> <a href="#"> Tìm kiếm </a></p>
-                        </div>
+            <p class="short">Ứng dụng tìm kiếm phòng trọ miễn phí cho người đi thuê hàng đầu Việt Nam</p>
+            <div class="search-box">
+                <div class="dropdown">
+                    <span><i class="fas fa-map-marker-alt icon"></i></span>
+                    <!-- nút chọn vị trí -->
+                    <select name="city" id="" class="dropBtn">
+                        <option value="" selected>Tất cả thành phố</option>
+                        <option value="Hanoi">Hà Nội</option>
+                        <option value="">Đà Nẵng</option>
+                        <option value="">TP. Hồ Chí Minh</option>
+                    </select>
+                </div>
+                <form action="" class="search-input" method="GET">
+                    <input type="text" placeholder="Tìm kiếm theo địa điểm, quận, tên đường...">
+                    <div class="submit-button">
+                        <button id="search-btn"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </div>
-                    <div class="col-md-3">
-                        <div class="box-item">
-                            <div class="icon  d-flex justify-content-center align-items-center">
-                                <i class="fas fa-hotel"></i>
-                            </div>
-                            <p class="name text-center"> Khách sạn  </p>
-                            <p class="desc text-center"> Những khách sạn nghỉ dưỡng tuyệt vời</p>
-                            <p class="text-center m-0"> <a href="#"> Tìm kiếm </a></p>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="box-item">
-                            <div class="icon  d-flex justify-content-center align-items-center">
-                                <i class="fas fa-memory"></i>
-                            </div>
-                            <p class="name text-center"> Biệt thự  </p>
-                            <p class="desc text-center"> Những khách sạn nghỉ dưỡng tuyệt vời</p>
-                            <p class="text-center m-0"> <a href="#"> Tìm kiếm </a></p>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="box-item">
-                            <div class="icon  d-flex justify-content-center align-items-center">
-                                <i class="fas fa-home"></i>
-                            </div>
-                            <p class="name text-center"> Khách sạn  </p>
-                            <p class="desc text-center"> Những khách sạn nghỉ dưỡng tuyệt vời</p>
-                            <p class="text-center m-0"> <a href="#"> Tìm kiếm </a></p>
-                        </div>
-                    </div>
+                </form>
+
+            </div>
+            <div class="app-link short">
+                <p>Tải app để có trải nghiệm tuyệt vời</p>
+                <div class="app">
+                    <a href="">
+                        <img src="https://www.ohanaliving.vn/3f9605492bb7388bbc16f25a16778cbc.png" alt="AppStore">
+                    </a>
+                    <a href="">
+                        <img src="https://www.ohanaliving.vn/137381da1471b1c2ad438c213a34b0a4.png" alt="AppStore">
+                    </a>
                 </div>
             </div>
         </div>
-    </section>
-    <section class="address py-5">
-        <div class="container">
-            <div class="box-title mb-5">
-                <h2 class="text-center"> Thành phố bạn đang đến </h2>
-                <div class="d-flex justify-content-center">
-                    <p class="m-0"> Chúng tôi cung cấp đầy đủ dịch vụ trên khắp các thành phố  </p>
+    </div>
 
-                </div>
-            </div>
-            <div class="cities">
-                <div class=" row">
-                    <div class="col-md-4">
-                        <a href="#">
-                            <div class="product city">
-                                <div class="img">
-                                    <img src="https://images.pexels.com/photos/1838640/pexels-photo-1838640.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
-                                </div>
-                                <div class="content">
-                                    <p class="price mb-2"> <strong> Hà Nội  </strong></p>
-                                    <p class="desc m-0">  1002 nơi nghỉ dưỡng </p>
-                                </div>
-                            </div>
-                        </a>
-
-                    </div>
-                    <div class="col-md-4">
-                        <a href="#">
-                            <div class="product city">
-                                <div class="img">
-                                    <img src="https://images.pexels.com/photos/462030/pexels-photo-462030.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
-                                </div>
-                                <div class="content">
-                                    <p class="price mb-2"> <strong> Đà Nẵng   </strong></p>
-                                    <p class="desc m-0">  1560 nơi nghỉ dưỡng </p>
-                                </div>
-                            </div>
-                        </a>
-
-                    </div>
-                    <div class="col-md-4">
-                        <a href="#">
-                            <div class="product city">
-                                <div class="img">
-                                    <img src="https://images.pexels.com/photos/457882/pexels-photo-457882.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
-                                </div>
-                                <div class="content">
-                                    <p class="price mb-2"> <strong> Hồ Chí Mình  </strong></p>
-                                    <p class="desc m-0">  2001 nơi nghỉ dưỡng </p>
-                                </div>
-                            </div>
-                        </a>
-
-                    </div>
-                </div>
-                <div class="text-center mt-5">
-                    <a href="#" class="seemore">  Xem thêm </a>
-                </div>
+    <!-- phần giới thiệu trang -->
+    <div class="body">
+        <div class="trending">
+            <h2>Xu hướng tìm kiếm</h2>
+            <div class="items">
+                @foreach($most_searched_districts as $district)
+                    <a class="item" href="#" style="text-decoration: none ;background: linear-gradient(0deg, rgba(2,0,36,0.8) 10%, rgba(4,0,0,0.1) 100%),url('{{ asset($district->image) }}') no-repeat 30% center;background-size: cover;"><span>{{ $district->name }}</span></a>
+                @endforeach
             </div>
 
         </div>
-    </section>
-    <section class="relation-address">
-        <div class="content">
-            <div class="box-title mb-4">
-                <h2 class="text-center"> Tìm nhà quanh địa điểm du lịch   </h2>
-                <p class="text-center"> Có thể tìm nhà xung quanh địa điểm du lịch </p>
-            </div>
-            <div class="form-group d-flex justify-content-center">
-
-                <button class="ml-3"> Tìm kiếm ngay  </button>
-            </div>
-        </div>
-    </section>
-    <section class="blog-index">
-        <div class="container">
-            <div class="box-title mb-5">
-                <h2 class="text-center"> Bài viết& Blog   </h2>
-                <p class="text-center"> Tham khảo các thông tin để thuận tiện cho việc tìm kiếm nhà nghỉ  </p>
-            </div>
+        <div class="container-fluid main-section">
             <div class="row">
-                <div class="col-lg-4">
-                    <div class="blog">
-                        <div class="img">
-                            <img src="https://images.pexels.com/photos/1571470/pexels-photo-1571470.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" class="img-fluid">
-                        </div>
-                        <div class="content">
-                            <p class="date text-uppercase mb-2"> Mạnh Dũng, 20/10/2020</p>
-                            <p class="title mb-0"> Du lịch Hà Nội  </p>
-                            <p class="desc"> Hà nội là một trong những điểm du lịch nổi tiếng nhất Việt Nam.Hà nội là một trong những điểm du lịch nổi tiếng nhất Việt Nam.</p>
-                            <button> Xem thêm </button>
-                        </div>
+                <div class="col-12 col-lg-8 newest-rooms room-list">
+                    <div class="top">
+                        <h2>Phòng mới nhất</h2>
+                    </div>
+                    <div class="rooms">
+                        @foreach($newest_rooms as $room)
+                            <a href="{{ route('guest.showroom', ['room_id' => $room->id]) }}" id="room-{{ $room->id }}">
+                                <div class="room row">
+                                    <div class="room-img col-md-5 col-sm-6 col-12">
+                                        <img src="{{ asset($room->image) }}" alt="Ảnh của phòng {{ $room->title }}" style="max-height: 247.09px!important">
+                                    </div>
+                                    <div class="room-info col">
+                                        <p class="room-name">
+                                            {{ $room->title }}
+                                        </p>
+                                        <div class="room-detail">
+                                            <div class="line-1 line">
+                                                <span class="icon"><i class="fa fa-home" aria-hidden="true"></i></span>
+                                                @if($room->rented == 0)
+                                                    <span>Còn phòng</span>
+                                                @else
+                                                    <span>Hết phòng</span>
+                                                @endif
+                                            </div>
+                                            <div class="line line-2">
+                                                <span class="icon"><i class="fas fa-user-friends"></i></span>
+                                                <span>Nam & Nữ</span>
+                                            </div>
+                                            <div class="line line-3">
+                                                <span class="icon"><i class="fas fa-ruler    "></i></span>
+                                                <span>{{ $room->area }} m<sup style="font-size: 10px;">2</sup></span>
+                                            </div>
+                                            <div class="line line-4">
+                                                <span class="icon"><i class="fas fa-map-marked    "></i></span>
+                                                <span>{{ $room->address }}</span>
+                                            </div>
+                                            <div class="line line-5">
+                                                <span class="icon"><i class="fas fa-money-check    "></i></span>
+                                                <span class="price">6 triệu/tháng</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <hr>
+                        @endforeach
+
+                        <a href="{{ route('guest.allroom') }}" class="view-all btn btn-success" style="margin: 0 auto; width: 110px;">Xem tất cả</a>
+
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="blog">
-                        <div class="img">
-                            <img src="https://images.pexels.com/photos/1571470/pexels-photo-1571470.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" class="img-fluid">
-                        </div>
-                        <div class="content">
-                            <p class="date text-uppercase mb-2"> Mạnh Dũng, 20/10/2020</p>
-                            <p class="title mb-0"> Du lịch Hải Phòng  </p>
-                            <p class="desc"> Hải Phòng là một trong những điểm du lịch nổi tiếng nhất Việt Nam.Hà nội là một trong những điểm du lịch nổi tiếng nhất Việt Nam.</p>
-                            <button> Xem thêm </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="blog">
-                        <div class="img">
-                            <img src="https://images.pexels.com/photos/1571470/pexels-photo-1571470.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" class="img-fluid">
-                        </div>
-                        <div class="content">
-                            <p class="date text-uppercase mb-2"> Mạnh Dũng, 20/10/2020</p>
-                            <p class="title mb-0"> Du lịch Nha Trang  </p>
-                            <p class="desc"> Nha trang là một trong những điểm du lịch nổi tiếng nhất Việt Nam.Hà nội là một trong những điểm du lịch nổi tiếng nhất Việt Nam.</p>
-                            <button> Xem thêm </button>
-                        </div>
-                    </div>
+                <div class="col-lg col-sm-12 col-12 posts">
+                    <h2>Bài viết</h2>
+                    @foreach($posts as $post)
+                        <a href="{{ route('guest.blogDetail', ['post_id' => $post->id]) }}" class="post row">
+                            <div class="post-img col-lg-12 col-md-5 col-12">
+                                <img src="{{ asset($post->thumbnail) }}" alt="{{ $post->title }}">
+                            </div>
+                            <div class="post-info col-lg-12 col-md-7 col-12">
+                                <div class="title">{{ $post->title }}</div>
+                                <div class="extra-info">
+                                    <span class="date"> <span><?php $create = date('M d, Y', strtotime($post->created_at)); echo $create ?></span> <span> by </span> <span> {{ \App\User::findOrFail($post->user_id)->name }} </span> </span>
+                                    <span>&nbsp</span>
+                                    <span class="article-views"><i class="fa fa-eye" aria-hidden="true"></i>{{ " " . $post->views }}</span>
+                                </div>
+                            </div>
+                        </a>
+                    @endforeach
+
+
+                    <a href="{{ route('guest.blog') }}" class="btn btn-success" style="width:110px; margin: 0 auto; margin-top: 20px; padding: 7px">Xem thêm</a>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+    <script>
+        // hiện thanh search phụ khi kéo xuống
+        $("document").ready(function() {
+            $(window).scroll(function() {
+                if ($(window).scrollTop() > 300) {
+                    $(".extra-menu").css("display", "flex");
+                } else {
+                    $(".extra-menu").hide();
+                }
+            })
+        })
 
+
+    </script>
 @endsection

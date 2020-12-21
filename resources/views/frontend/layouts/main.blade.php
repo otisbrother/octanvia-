@@ -13,7 +13,11 @@
     <link rel="stylesheet" href="../frontend/css/style.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        var base_url = '<?php echo e(url('/')); ?>';
+    </script>
     <title>Rent House</title>
+
 </head>
 
 <body>
@@ -36,7 +40,7 @@
     <!-- Footer -->
 </div>
 <script src="../frontend/js/drop_menu.js"></script>
-
+<script src="../frontend/js/main.js" ></script>
 </body>
 
 </html>

@@ -20,3 +20,19 @@ function searchTitle(key_title) {
             }
         });
 }
+function getAvatarUser(user_id) {
+    $.ajax({
+        url: base_url + '/getAvatarUser/'+user_id, // base_url được khai báo ở đầu page == http://renthouse.co
+        type: 'GET',
+        data: {}, // dữ liệu truyền sang nếu có
+        dataType: "json", // kiểu dữ liệu trả về
+        success: function (response) { // success : kết quả trả về sau khi gửi request ajax
+            $('#user_image').attr('src', response);
+            $('#profile-picture').attr('src', response);
+        },
+        error: function (e) { // lỗi nếu có
+            console.log(e.message);
+        }
+    });
+}
+

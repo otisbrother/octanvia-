@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\City;
 use App\District;
+use App\Notify;
 use App\Post;
 use App\Room;
 use App\Room_image;
@@ -15,6 +16,7 @@ use App\User_vote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use MongoDB\Driver\Session;
 
 class GuestController extends Controller
 {
@@ -30,6 +32,12 @@ class GuestController extends Controller
             'newest_rooms' => $newest_rooms,
             'posts' => $posts,
         ]);
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
     }
 
     public function get_login_register()
@@ -68,6 +76,56 @@ class GuestController extends Controller
             }
         }
         return redirect()->back()->with('msg', 'Email hoặc Password không chính xác');
+    }
+
+    public function postRegister(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email',
+            'password' => 'required|min:8',
+        ]);
+
+        $is_active = 1;
+        //luu vào csdl
+        $user = new User();
+        $user->name = $request->input('name'); // họ tên
+        $user->email = $request->input('email'); // email
+        $user->password = bcrypt($request->input('password')); // mật khẩu
+        $user->role_id = 3;
+        $user->is_active = $is_active;
+        $user->save();
+
+        // chuyen dieu huong trang
+        return redirect()->route('guest.login-register')->with('register_status', 'true');
+    }
+
+    public function getProfile()
+    {
+        $user = Auth::user();
+        return view('frontend.user_profile', [
+            'user' => $user,
+        ]);
+    }
+    public function getProfileinfo()
+    {
+        $user = Auth::user();
+        return view('frontend.user.profile_info', [
+            'user' => $user,
+        ]);
+    }
+    public function getChangePassword()
+    {
+        return view('frontend.user.changePassword');
+    }
+
+    public function getNoti()
+    {
+        $user = Auth::user();
+        $data = Notify::where(['receive_id' => $user->id])->get();
+        return view('frontend.user.noti-page', [
+            'data' => $data
+        ]);
     }
 
     public function getAllPosts()
@@ -167,6 +225,55 @@ class GuestController extends Controller
         ]);
     }
 
+    public function updateProfile(Request $request)
+    {
+
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+        ]);
+        $user = Auth::user();
+
+        //luu vào csdl
+        $user->name = $request->input('name'); // họ tên
+        $user->birthday = $request->input('birthday');
+        $user->CMND = $request->input('cmnd');
+        $user->phone = $request->input('phone');
+        $user->address = $request->input('address');
+        $user->gender = $request->input('gender');
+        if ($request->hasFile('new_avatar')) {
+            // xóa file cũ
+            @unlink(public_path($user->image)); // hàm unlink của PHP không phải laravel , chúng ta thêm @ đằng trước tránh bị lỗi
+            // get file
+            $file = $request->file('new_avatar');
+            // get ten
+            $filename = time().'_'.$file->getClientOriginalName();
+            // duong dan upload
+            $path_upload = 'uploads/user/';
+            // upload file
+            $request->file('new_avatar')->move($path_upload,$filename);
+
+            $user->image = $path_upload.$filename;
+        }
+
+        $user->save();
+        $new_link_image = 'http://renthouse.co/' . $user->image;
+        // chuyen dieu huong trang
+        return redirect()->back()->with('update_status', 'true');
+    }
+//    public  function test()
+//    {
+//        $user = Auth::user();
+//        return view('frontend.user.test', [
+//            'user' => $user
+//        ]);
+//    }
+
+    public function getLinkAvatarUser($user_id)
+    {
+        $user = User::findOrFail($user_id);
+        $link = 'http://renthouse.co/' . $user->image;
+        return json_encode($link);
+    }
 
 
     public function storeLiked($user_id, $room_id)
